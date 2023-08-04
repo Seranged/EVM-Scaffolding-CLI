@@ -8,16 +8,19 @@ const { exec } = require('child_process');
  */
 function installDependencies(dependencies) {
   return new Promise((resolve, reject) => {
-    const npmInstall = exec(`npm install ${dependencies.join(' ')}`, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`exec error: ${error}`);
-        reject(error);
-        return;
-      }
-      console.log(`stdout: ${stdout}`);
-      console.error(`stderr: ${stderr}`);
-      resolve();
-    });
+    const npmInstall = exec(
+      `npm install ${dependencies.join(' ')}`,
+      (error, stdout, stderr) => {
+        if (error) {
+          console.error(`exec error: ${error}`);
+          reject(error);
+          return;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.error(`stderr: ${stderr}`);
+        resolve();
+      },
+    );
 
     npmInstall.on('exit', (code) => {
       console.log(`Child exited with code ${code}`);

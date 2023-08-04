@@ -7,6 +7,9 @@
     "start": "node src/index.js",
     "test": "jest tests/index.test.js"
   },
+  "bin": {
+    "seranged-evm-bootstrap": "./src/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/seranged/evm-scaffolding-cli.git"

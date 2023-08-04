@@ -1,9 +1,10 @@
+#!/usr/bin/env node
 import * as inquirer from 'inquirer';
 const installDependencies = require('./scripts/installDependencies');
 const modifyScripts = require('./scripts/modifyScripts');
 const fs = require('fs');
 import { romeConfig } from '../src/scripts/linter-formatters/rome'
-import { eslintPrettierConfig } from '../src/scripts/linter-formatters/eslint-prettier'
+import { prettierConfig, eslintConfig } from '../src/scripts/linter-formatters/eslint-prettier'
 
 const questions = [
   {
@@ -31,8 +32,8 @@ const  answers = await (inquirer as any).prompt(questions);
     
     if (answers.linter === 'ESLint+Prettier') {
       await installDependencies(['eslint', 'prettier']);
-      fs.writeFileSync('.eslintrc.json', JSON.stringify(eslintPrettierConfig, null, 2));
-    } else if (answers.linter === 'Rome') {
+      fs.writeFileSync('.eslintrc.js', `module.exports = ${JSON.stringify(eslintConfig, null, 2)}`);
+      fs.writeFileSync('.prettierrc.json', JSON.stringify(prettierConfig, null, 2));    } else if (answers.linter === 'Rome') {
       await installDependencies(['rome']);
       fs.writeFileSync('rome.json', JSON.stringify(romeConfig, null, 2));
     }
