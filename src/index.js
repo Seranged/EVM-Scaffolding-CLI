@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import * as inquirer from 'inquirer';
+const inquirer = require('inquirer');
 const installDependencies = require('./scripts/installDependencies');
 const modifyScripts = require('./scripts/modifyScripts');
 const fs = require('fs');
