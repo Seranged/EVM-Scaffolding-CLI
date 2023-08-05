@@ -3,11 +3,11 @@ import inquirer from 'inquirer'
 import { installDependencies } from './scripts/installDependencies.js'
 import { modifyScripts } from './scripts/modifyScripts.js'
 import fs from 'fs'
-import path from 'path'
 import { romeConfig } from './scripts/linter-formatters/rome.js'
 import { prettierConfig } from './scripts/linter-formatters/eslint-prettier.js'
 import { eslintConfig } from './scripts/linter-formatters/eslint-prettier.js'
 import { readFileSync } from 'fs'
+const { execSync } = require('child_process');
 const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString())
 
 const questions = [
@@ -18,13 +18,13 @@ const questions = [
     default: ['Rome'],
     choices: ['Rome', 'ESLint+Prettier', 'None'],
   },
-  {
-    type: 'list',
-    name: 'router',
-    default: ['App Router'],
-    message: 'Which Nextjs router do you want to use?',
-    choices: ['App Router', 'Pages Router'],
-  },
+  // {
+  //   type: 'list',
+  //   name: 'router',
+  //   default: ['App Router'],
+  //   message: 'Which Nextjs router do you want to use?',
+  //   choices: ['App Router', 'Pages Router'],
+  // },
   // {
   //   type: 'list',
   //   name: 'uiKit',
@@ -39,13 +39,13 @@ const questions = [
   //   message: 'Which wallet connection handler do you want to use?',
   //   choices: ['RainbowKit', 'FamilyKit', 'None'],
   // },
-  {
-    type: 'list',
-    name: 'typeChecker',
-    default: ['AbiType'],
-    message: 'Which EVM contract type checker do you want to use?',
-    choices: ['AbiType', 'TypeChain', 'None'],
-  },
+  // {
+  //   type: 'list',
+  //   name: 'typeChecker',
+  //   default: ['AbiType'],
+  //   message: 'Which EVM contract type checker do you want to use?',
+  //   choices: ['AbiType', 'TypeChain', 'None'],
+  // },
   // {
   //   type: 'list',
   //   name: 'stateManager',
@@ -72,17 +72,12 @@ Package Version: ${packageInfo.version}
       await installDependencies(['rome'])
       fs.writeFileSync('rome.json', JSON.stringify(romeConfig, null, 2))
     }
-    if (answers.router === 'App Router') {
-      copyBaseApplication('./src/scripts/nextjs/baseApplication', './')
-    } else if (answers.router === 'Pages Router') {
-      copyBaseApplication('./src/scripts/nextjs/baseApplication', './')
-    }
-    if (answers.typeChecker === 'AbiType') {
-      fs.copyFileSync(
-        path.join(__dirname, './scripts/nextjs/evmTypescript/functions/readContract.ts'),
-        path.join(process.cwd(), './src/contracts/readContract.ts'),
-      )
-    }
+    // if (answers.typeChecker === 'AbiType') {
+    //   fs.copyFileSync(
+    //     path.join(__dirname, './scripts/nextjs/evmTypescript/functions/readContract.ts'),
+    //     path.join(process.cwd(), './src/contracts/readContract.ts'),
+    //   )
+    // }
 
     if (answers.dependencies && answers.dependencies.length > 0) {
       await installDependencies(answers.dependencies)
@@ -96,22 +91,6 @@ Package Version: ${packageInfo.version}
   } catch (error) {
     console.error('An error occurred:', error)
   }
-}
-
-function copyBaseApplication(sourceDir: string, targetDir: string) {
-  const sourceFiles = fs.readdirSync(sourceDir)
-
-  sourceFiles.forEach((file) => {
-    const sourceFile = path.join(sourceDir, file)
-    const targetFile = path.join(targetDir, file)
-
-    if (fs.lstatSync(sourceFile).isDirectory()) {
-      fs.mkdirSync(targetFile, { recursive: true })
-      copyBaseApplication(sourceFile, targetFile)
-    } else {
-      fs.copyFileSync(sourceFile, targetFile)
-    }
-  })
 }
 
 mainFunction()

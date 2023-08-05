@@ -4,12 +4,14 @@
     "target": "es6",
     "jsx": "react",
     "moduleResolution": "node",
+    "outDir": "dist",
+    "sourceMap": false,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -17,7 +19,6 @@
     "noUnusedParameters": true,
     "removeComments": false,
     "preserveConstEnums": true,
-    "sourceMap": true,
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
@@ -25,6 +26,6 @@
     },
     "types": ["node", "jest"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }
