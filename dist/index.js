@@ -6,49 +6,58 @@ import fs from 'fs';
 import { romeConfig } from './scripts/linter-formatters/rome.js';
 import { prettierConfig } from './scripts/linter-formatters/eslint-prettier.js';
 import { eslintConfig } from './scripts/linter-formatters/eslint-prettier.js';
+import { readFileSync } from 'fs';
+const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString());
 const questions = [
     {
         type: 'list',
         name: 'linter',
         message: 'Which linter/formatter do you want to use?',
-        choices: ['ESLint+Prettier', 'Rome'],
+        default: ['Rome'],
+        choices: ['Rome', 'ESLint+Prettier', 'None'],
     },
-    {
-        type: 'list',
-        name: 'router',
-        message: 'Which Nextjs router do you want to use?',
-        choices: ['Pages Router', 'App Router'],
-    },
-    {
-        type: 'list',
-        name: 'uiKit',
-        message: 'Which UI framework do you want to use alongside tailwind?',
-        choices: ['Shadcn', 'Flowbite', 'DaisyUI'],
-    },
-    {
-        type: 'list',
-        name: 'wallet',
-        message: 'Which wallet connection handler do you want to use?',
-        choices: ['RainbowKit', 'FamilyKit'],
-    },
-    {
-        type: 'list',
-        name: 'typeChecker',
-        message: 'Which EVM contract type checker do you want to use?',
-        choices: ['AbiType', 'TypeChain'],
-    },
-    {
-        type: 'list',
-        name: 'stateManager',
-        message: 'Which global state manager do you want to use?',
-        choices: ['Redux', 'MobX', 'Zustand'],
-    },
+    // {
+    //   type: 'list',
+    //   name: 'router',
+    //   default: ['App Router'],
+    //   message: 'Which Nextjs router do you want to use?',
+    //   choices: ['App Router', 'Pages Router', 'None'],
+    // },
+    // {
+    //   type: 'list',
+    //   name: 'uiKit',
+    //   default: ['Shadcn'],
+    //   message: 'Which UI framework do you want to use alongside tailwind?',
+    //   choices: ['Shadcn', 'Flowbite', 'DaisyUI', 'None'],
+    // },
+    // {
+    //   type: 'list',
+    //   name: 'wallet',
+    //   default: ['RainbowKit'],
+    //   message: 'Which wallet connection handler do you want to use?',
+    //   choices: ['RainbowKit', 'FamilyKit', 'None'],
+    // },
+    // {
+    //   type: 'list',
+    //   name: 'typeChecker',
+    //   default: ['AbiType'],
+    //   message: 'Which EVM contract type checker do you want to use?',
+    //   choices: ['AbiType', 'TypeChain', 'None'],
+    // },
+    // {
+    //   type: 'list',
+    //   name: 'stateManager',
+    //   message: 'Which global state manager do you want to use?',
+    //   choices: ['Redux', 'MobX', 'Zustand', 'None'],
+    // },
 ];
 export async function mainFunction() {
     console.log(`
         SERANGED              EVM               BOOTSTRAP
                                                                                                                                
- 53 45 52 41 4E 47 45 44    45 56 4D    42 4F 4F 54 53 54 52 41 50                                      
+ 53 45 52 41 4E 47 45 44    45 56 4D    42 4F 4F 54 53 54 52 41 50   
+ 
+Package Version: ${packageInfo.version}
   `);
     try {
         const answers = await inquirer.prompt(questions);
