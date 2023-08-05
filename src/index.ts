@@ -72,11 +72,11 @@ Package Version: ${packageInfo.version}
       fs.writeFileSync('rome.json', JSON.stringify(romeConfig, null, 2))
     }
 
-    if (answers.dependencies.length > 0) {
+    if (answers.dependencies && answers.dependencies.length > 0) {
       await installDependencies(answers.dependencies)
     }
-
-    if (answers.scripts.length > 0) {
+    
+    if (answers.scripts && answers.scripts.length > 0) {
       await modifyScripts(answers.scripts)
     }
 
