@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 import inquirer from 'inquirer';
-import { installDependencies } from './scripts/installDependencies';
-import { modifyScripts } from './scripts/modifyScripts';
+import { installDependencies } from './scripts/installDependencies.js';
+import { modifyScripts } from './scripts/modifyScripts.js';
 import fs from 'fs';
-import {romeConfig} from '../src/scripts/linter-formatters/rome';
-import {prettierConfig} from '../src/scripts/linter-formatters/eslint-prettier';
-import {eslintConfig} from '../src/scripts/linter-formatters/eslint-prettier';
+import { romeConfig } from './scripts/linter-formatters/rome.js';
+import { prettierConfig } from './scripts/linter-formatters/eslint-prettier.js';
+import { eslintConfig } from './scripts/linter-formatters/eslint-prettier.js';
 
 const questions = [
   {
@@ -50,6 +50,11 @@ const questions = [
 
 
 export async function mainFunction() {
+  console.log(`
+        SERANGED              EVM               BOOTSTRAP
+                                                                                                                               
+ 53 45 52 41 4E 47 45 44    45 56 4D    42 4F 4F 54 53 54 52 41 50                                      
+  `);
   try {
     const answers = await inquirer.prompt(questions)    
     if (answers.linter === 'ESLint+Prettier') {

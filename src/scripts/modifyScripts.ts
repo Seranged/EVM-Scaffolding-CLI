@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 /**
  * Modify the given scripts based on user input.
@@ -33,5 +33,3 @@ export function modifyScripts(scripts: string[]): Promise<void> {
     }
   });
 }
-
-module.exports = modifyScripts;
