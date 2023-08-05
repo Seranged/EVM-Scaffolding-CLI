@@ -11,9 +11,9 @@ describe('EVM Scaffolding CLI', () => {
   let modifyScriptsStub: sinon.SinonStub;
 
   beforeEach(() => {
-    promptStub = sinon.stub();
-    installDependenciesStub = sinon.stub();
-    modifyScriptsStub = sinon.stub();
+    promptStub = sinon.stub(inquirer, 'prompt');
+    installDependenciesStub = sinon.stub().callsFake(installDependencies as any);
+    modifyScriptsStub = sinon.stub().callsFake(modifyScripts as any);
   });
 
   afterEach(() => {
@@ -26,8 +26,6 @@ describe('EVM Scaffolding CLI', () => {
       dependencies: ['dependency1', 'dependency2'],
       scripts: [],
     });
-
-    // Rest of your test code...
   });
 
   it('should install selected dependencies', async () => {

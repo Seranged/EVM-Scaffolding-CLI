@@ -31,4 +31,4 @@ export const romeConfig = {
       quoteStyle: 'single',
     },
   },
-};
+}
