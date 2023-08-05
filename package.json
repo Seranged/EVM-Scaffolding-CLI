@@ -1,15 +1,16 @@
 {
   "name": "evm-scaffolding-cli",
-  "version": "1.0.13",
+  "version": "1.0.18",
   "description": "A CLI frontend repo for EVM scaffolding that allows users to choose dependencies to install and modifies scripts based on user input.",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
+    "prestart": "tsc",
+    "start": "node dist/index.js",
     "test": "jest tests/index.test.js"
   },
   "bin": {
-    "evm-scaffolding-cli": "./src/index.js"
+    "evm-scaffolding-cli": "./dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -30,12 +31,16 @@
   "homepage": "https://github.com/seranged/evm-scaffolding-cli#readme",
   "dependencies": {
     "@types/inquirer": "^9.0.3",
-    "inquirer": "^7.3.3"
+    "@types/node": "^20.4.7",
+    "inquirer": "^7.3.3",
+    "sinon": "^15.2.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.1",
+    "@types/sinon": "^10.0.16",
     "eslint": "^7.22.0",
     "jest": "^26.6.3",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "typescript": "^5.1.6"
   }
 }

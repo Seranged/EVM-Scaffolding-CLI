@@ -7,11 +7,11 @@ const path = require('path');
  * @param {string[]} scripts - The scripts to modify.
  * @returns {Promise} - A promise that resolves when the modification is complete.
  */
-function modifyScripts(scripts) {
+export function modifyScripts(scripts: string[]): Promise<void> {
   return new Promise((resolve, reject) => {
     try {
       scripts.forEach((script) => {
-        const scriptPath = path.join(__dirname, `../${script}.js`);
+        const scriptPath = path.join(__dirname, `../${script}.ts`);
 
         if (fs.existsSync(scriptPath)) {
           let scriptContent = fs.readFileSync(scriptPath, 'utf8');

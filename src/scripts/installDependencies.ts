@@ -6,11 +6,11 @@ const { exec } = require('child_process');
  * @param {string[]} dependencies - The dependencies to install.
  * @returns {Promise} - A promise that resolves when the installation is complete.
  */
-function installDependencies(dependencies) {
+export function installDependencies(dependencies: string[]): Promise<void> {
   return new Promise((resolve, reject) => {
     const npmInstall = exec(
       `npm install ${dependencies.join(' ')}`,
-      (error, stdout, stderr) => {
+      (error: any, stdout: any, stderr: any) => {
         if (error) {
           console.error(`exec error: ${error}`);
           reject(error);
@@ -22,10 +22,8 @@ function installDependencies(dependencies) {
       },
     );
 
-    npmInstall.on('exit', (code) => {
+    npmInstall.on('exit', (code: any) => {
       console.log(`Child exited with code ${code}`);
     });
   });
 }
-
-module.exports = installDependencies;

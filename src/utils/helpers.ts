@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import * as fs from 'fs';
+import * as path from 'path';
 
 /**
  * Check if a file or directory exists at the given path.
@@ -7,7 +7,7 @@ const path = require('path');
  * @param {string} filePath - The path to the file or directory.
  * @returns {boolean} - True if the file or directory exists, false otherwise.
  */
-function fileExists(filePath) {
+function fileExists(filePath: fs.PathLike) {
   try {
     fs.accessSync(filePath);
     return true;
@@ -22,7 +22,7 @@ function fileExists(filePath) {
  * @param {string} relativePath - The relative path to the file or directory.
  * @returns {string} - The absolute path to the file or directory.
  */
-function getAbsolutePath(relativePath) {
+function getAbsolutePath(relativePath: string) {
   return path.resolve(__dirname, relativePath);
 }
 
