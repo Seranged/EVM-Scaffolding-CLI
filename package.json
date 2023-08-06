@@ -1,6 +1,6 @@
 {
   "name": "evm-scaffolding-cli",
-  "version": "1.0.79",
+  "version": "1.0.78",
   "description": "A CLI frontend repo for EVM scaffolding that allows users to choose dependencies to install and modifies scripts based on user input.",
   "main": "dist/index.js",
   "type": "module",
@@ -13,9 +13,8 @@
     "lint": "pnpm rome check src --apply",
     "lintCheck": "pnpm rome check src",
     "format": "pnpm rome format src --write",
-    "version": "npm version patch -m 'v%s' && git push",
-    "prepublishOnly": "git add . && (git commit -m 'Prepare for new version' || echo 'No changes to commit') && git push",
-    "publish": "pnpm run prepublishOnly && pnpm run version && tsc && npm publish && pnpm publish --no-git-checks"
+    "prepublish": "npm version patch && pnpm tsc",
+    "publish": "git add . && git commit -m 'v%s' && git push && npm publish"
   },
   "bin": {
     "evm-scaffolding-cli": "./dist/index.js"
