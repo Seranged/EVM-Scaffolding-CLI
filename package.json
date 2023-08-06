@@ -13,8 +13,9 @@
     "lint": "pnpm rome check src --apply",
     "lintCheck": "pnpm rome check src",
     "format": "pnpm rome format src --write",
+    "version": "npm version patch -m  && git push",
     "prepublish": "pnpm version patch && pnpm tsc",
-    "publish": "git add . && git commit -m 'v'$(node -p -e \"require('./package.json').version\") && git push && npm publish"
+    "publish": "git add . && git commit -m 'v'$(node -p -e \"require('./package.json').version\") && git push && pnpm publish"
   },
   "bin": {
     "evm-scaffolding-cli": "./dist/index.js"
