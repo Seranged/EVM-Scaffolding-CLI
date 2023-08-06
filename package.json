@@ -13,8 +13,7 @@
     "lint": "pnpm rome check src --apply",
     "lintCheck": "pnpm rome check src",
     "format": "pnpm rome format src --write",
-    "publish": "tsc && git diff-index --quiet HEAD || (git add . && git commit -m 'Auto commit before publish') && npm version patch && git push && pnpm publish --no-git-checks"
-  },
+    "publish": "tsc && git diff-index --quiet HEAD || (git add . && git commit -m 'Auto commit before version update') && npm version patch -m 'v%s' && git push && pnpm publish --no-git-checks"  },
   "bin": {
     "evm-scaffolding-cli": "./dist/index.js"
   },
