@@ -111,7 +111,6 @@ export async function mainFunction() {
     //   )
     // }
 
-
     if (answers.dependencies && answers.dependencies.length > 0) {
       await installDependencies(answers.dependencies, directory)
     }

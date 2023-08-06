@@ -13,10 +13,10 @@
     "lint": "pnpm rome check src --apply",
     "lintCheck": "pnpm rome check src",
     "format": "pnpm rome format src --write",
-    "version": "npm version patch -m  && git push",
+    "version": "npm version patch",
     "prepublish": "git stash save --keep-index --include-untracked && pnpm version patch && pnpm tsc && git stash pop || true",
-    "publish": "git add . && (git diff --cached --quiet || (git commit -m 'v'$(node -p -e \"require('./package.json').version\") && git push)) && npm publish"  },
-  "bin": {
+    "publish": "npm version && git add . && (git diff --cached --quiet || (git commit -m 'v'$(node -p -e \"require('./package.json').version\") && git push)) && npm publish"}, 
+   "bin": {
     "evm-scaffolding-cli": "./dist/index.js"
   },
   "repository": {
