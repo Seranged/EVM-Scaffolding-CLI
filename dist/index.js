@@ -72,7 +72,7 @@ const questions = [
 export function mainFunction() {
     return __awaiter(this, void 0, void 0, function* () {
         console.log(`
-  ︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾
+  ︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾
 
           SERANGED              EVM               BOOTSTRAP                                                                                                 
   53 45 52 41 4E 47 45 44    45 56 4D    42 4F 4F 54 53 54 52 41 50   
