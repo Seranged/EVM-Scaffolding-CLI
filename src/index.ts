@@ -10,6 +10,7 @@ import { prettierConfig } from './scripts/linter-formatters/eslint-prettier.js'
 import { eslintConfig } from './scripts/linter-formatters/eslint-prettier.js'
 import { createPackageJson } from './scripts/createPackageJson.js'
 import { cloneRepo } from './scripts/cloneRepo.js'
+import { RainbowKitNavbar } from './scripts/navbar/rainbowKitNavbar.js'
 const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString())
 
 const questions = [
@@ -33,19 +34,19 @@ const questions = [
   //   message: 'Which Nextjs router do you want to use?',
   //   choices: ['App Router', 'Pages Router'],
   // },
+  {
+    type: 'list',
+    name: 'wallet',
+    default: ['RainbowKit'],
+    message: 'Which wallet connection handler do you want to use?',
+    choices: ['RainbowKit', 'FamilyKit', 'None'],
+  },
   // {
   //   type: 'list',
   //   name: 'uiKit',
   //   default: ['Shadcn'],
   //   message: 'Which UI framework do you want to use alongside tailwind?',
   //   choices: ['Shadcn', 'Flowbite', 'DaisyUI', 'None'],
-  // },
-  // {
-  //   type: 'list',
-  //   name: 'wallet',
-  //   default: ['RainbowKit'],
-  //   message: 'Which wallet connection handler do you want to use?',
-  //   choices: ['RainbowKit', 'FamilyKit', 'None'],
   // },
   // {
   //   type: 'list',
@@ -97,12 +98,19 @@ export async function mainFunction() {
       fs.writeFileSync(`${directory}/rome.json`, JSON.stringify(romeConfig, null, 2))
       spinner.succeed()
     }
+    if (answers.wallet === 'RainbowKit') {
+      const spinner: any = ora('Adding RainbowKit and a Navbar...').start()
+      await installDependencies(['@rainbow-me/rainbowkit'], directory)
+      fs.writeFileSync(`${directory}/src/components/navbar/rainbowKitNavbar.tsx`, RainbowKitNavbar)
+      spinner.succeed()
+    }
     // if (answers.typeChecker === 'AbiType') {
     //   fs.copyFileSync(
     //     path.join(__dirname, './scripts/nextjs/evmTypescript/functions/readContract.ts'),
     //     path.join(process.cwd(), './src/contracts/readContract.ts'),
     //   )
     // }
+
 
     if (answers.dependencies && answers.dependencies.length > 0) {
       await installDependencies(answers.dependencies, directory)
