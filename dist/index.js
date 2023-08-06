@@ -9,16 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import fs from 'fs';
+import { readFileSync } from 'fs';
+import ora from 'ora';
 import inquirer from 'inquirer';
 import { installDependencies } from './scripts/installDependencies.js';
 import { modifyScripts } from './scripts/modifyScripts.js';
 import { romeConfig } from './scripts/linter-formatters/rome.js';
 import { prettierConfig } from './scripts/linter-formatters/eslint-prettier.js';
 import { eslintConfig } from './scripts/linter-formatters/eslint-prettier.js';
-import { readFileSync } from 'fs';
-import ora from 'ora';
 import { createPackageJson } from './scripts/createPackageJson.js';
 import { cloneRepo } from './scripts/cloneRepo.js';
+// import { createProjectRoot } from './scripts/createRoot.js'
 const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString());
 const questions = [
     {
@@ -32,7 +33,7 @@ const questions = [
         name: 'linter',
         message: 'Which linter/formatter do you want to use?',
         default: ['Rome'],
-        choices: ['Rome', 'ESLint+Prettier', 'None'],
+        choices: ['Rome', 'ESLint and Prettier', 'None'],
     },
     // {
     //   type: 'list',
@@ -81,15 +82,16 @@ Package Version: ${packageInfo.version}
         try {
             const answers = yield inquirer.prompt(questions);
             const directory = `./${answers.projectName}`;
-            const spinner = ora('Adding package.json').start();
-            createPackageJson(answers.projectName, directory);
-            spinner.succeed();
             const repoUrl = 'https://github.com/Seranged/EVM-FE-Bootstrap.git';
             const branch = 'cli-base';
             const spinnerRepo = ora('Installing base NextJS files').start();
             yield cloneRepo(repoUrl, branch, directory);
+            // createProjectRoot(directory)
+            const spinner = ora('Adding package.json').start();
+            createPackageJson(answers.projectName, directory);
+            spinner.succeed();
             spinnerRepo.succeed();
-            if (answers.linter === 'ESLint+Prettier') {
+            if (answers.linter === 'ESLint and Prettier') {
                 const spinner = ora('Adding and installing Eslint and Prettier...').start();
                 yield installDependencies(['eslint', 'prettier']);
                 fs.writeFileSync(`${directory}/.eslintrc.js`, `module.exports = ${JSON.stringify(eslintConfig, null, 2)}`);
