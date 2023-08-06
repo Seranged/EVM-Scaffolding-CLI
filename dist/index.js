@@ -19,7 +19,6 @@ import { prettierConfig } from './scripts/linter-formatters/eslint-prettier.js';
 import { eslintConfig } from './scripts/linter-formatters/eslint-prettier.js';
 import { createPackageJson } from './scripts/createPackageJson.js';
 import { cloneRepo } from './scripts/cloneRepo.js';
-// import { createProjectRoot } from './scripts/createRoot.js'
 const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString());
 const questions = [
     {
@@ -73,11 +72,14 @@ const questions = [
 export function mainFunction() {
     return __awaiter(this, void 0, void 0, function* () {
         console.log(`
-        SERANGED              EVM               BOOTSTRAP
-                                                                                                                               
- 53 45 52 41 4E 47 45 44    45 56 4D    42 4F 4F 54 53 54 52 41 50   
+  ︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾
+
+          SERANGED              EVM               BOOTSTRAP                                                                                                 
+  53 45 52 41 4E 47 45 44    45 56 4D    42 4F 4F 54 53 54 52 41 50   
  
-Package Version: ${packageInfo.version}
+               Package Version: ${packageInfo.version}
+
+  ︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾
   `);
         try {
             const answers = yield inquirer.prompt(questions);
@@ -86,21 +88,21 @@ Package Version: ${packageInfo.version}
             const branch = 'cli-base';
             const spinnerRepo = ora('Installing base NextJS files').start();
             yield cloneRepo(repoUrl, branch, directory);
-            // createProjectRoot(directory)
-            const spinner = ora('Adding package.json').start();
-            createPackageJson(answers.projectName, directory);
-            spinner.succeed();
             spinnerRepo.succeed();
+            const spinnerInstall = ora('Installing base dependencies').start();
+            yield createPackageJson(answers.projectName, directory);
+            yield installDependencies([], directory);
+            spinnerInstall.succeed();
             if (answers.linter === 'ESLint and Prettier') {
                 const spinner = ora('Adding and installing Eslint and Prettier...').start();
-                yield installDependencies(['eslint', 'prettier']);
+                yield installDependencies(['eslint', 'prettier'], directory);
                 fs.writeFileSync(`${directory}/.eslintrc.js`, `module.exports = ${JSON.stringify(eslintConfig, null, 2)}`);
                 fs.writeFileSync(`${directory}/.prettierrc.json`, JSON.stringify(prettierConfig, null, 2));
                 spinner.succeed();
             }
             else if (answers.linter === 'Rome') {
                 const spinner = ora('Adding and installing Rome...').start();
-                yield installDependencies(['rome']);
+                yield installDependencies(['rome'], directory);
                 fs.writeFileSync(`${directory}/rome.json`, JSON.stringify(romeConfig, null, 2));
                 spinner.succeed();
             }
@@ -111,7 +113,7 @@ Package Version: ${packageInfo.version}
             //   )
             // }
             if (answers.dependencies && answers.dependencies.length > 0) {
-                yield installDependencies(answers.dependencies);
+                yield installDependencies(answers.dependencies, directory);
             }
             if (answers.scripts && answers.scripts.length > 0) {
                 yield modifyScripts(answers.scripts);

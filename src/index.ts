@@ -64,11 +64,14 @@ const questions = [
 
 export async function mainFunction() {
   console.log(`
-        SERANGED              EVM               BOOTSTRAP
-                                                                                                                               
- 53 45 52 41 4E 47 45 44    45 56 4D    42 4F 4F 54 53 54 52 41 50   
+  ︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾
+
+          SERANGED              EVM               BOOTSTRAP                                                                                                 
+  53 45 52 41 4E 47 45 44    45 56 4D    42 4F 4F 54 53 54 52 41 50   
  
-Package Version: ${packageInfo.version}
+               Package Version: ${packageInfo.version}
+
+  ︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾
   `)
   try {
     const answers = await inquirer.prompt(questions)
@@ -78,18 +81,19 @@ Package Version: ${packageInfo.version}
     const spinnerRepo: any = ora('Installing base NextJS files').start()
     await cloneRepo(repoUrl, branch, directory)
     spinnerRepo.succeed()
-    const spinner: any = ora('Adding package.json').start()
-    createPackageJson(answers.projectName, directory)
-    spinner.succeed()
+    const spinnerInstall: any = ora('Installing base dependencies').start()
+    await createPackageJson(answers.projectName, directory)
+    await installDependencies([], directory)
+    spinnerInstall.succeed()
     if (answers.linter === 'ESLint and Prettier') {
       const spinner: any = ora('Adding and installing Eslint and Prettier...').start()
-      await installDependencies(['eslint', 'prettier'])
+      await installDependencies(['eslint', 'prettier'], directory)
       fs.writeFileSync(`${directory}/.eslintrc.js`, `module.exports = ${JSON.stringify(eslintConfig, null, 2)}`)
       fs.writeFileSync(`${directory}/.prettierrc.json`, JSON.stringify(prettierConfig, null, 2))
       spinner.succeed()
     } else if (answers.linter === 'Rome') {
       const spinner: any = ora('Adding and installing Rome...').start()
-      await installDependencies(['rome'])
+      await installDependencies(['rome'], directory)
       fs.writeFileSync(`${directory}/rome.json`, JSON.stringify(romeConfig, null, 2))
       spinner.succeed()
     }
@@ -101,7 +105,7 @@ Package Version: ${packageInfo.version}
     // }
 
     if (answers.dependencies && answers.dependencies.length > 0) {
-      await installDependencies(answers.dependencies)
+      await installDependencies(answers.dependencies, directory)
     }
 
     if (answers.scripts && answers.scripts.length > 0) {
