@@ -13,7 +13,7 @@
     "lint": "pnpm rome check src --apply",
     "lintCheck": "pnpm rome check src",
     "format": "pnpm rome format src --write",
-    "npmPublish": "npm publish",
+    "npmPublish": "pnpm version patch && npm publish",
     "prepublish": "pnpm version patch && pnpm tsc",
     "publish": "git add . && git commit -m 'v'$(node -p -e \"require('./package.json').version\") && git push && pnpm run npmPublish"
   },
