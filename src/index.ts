@@ -118,3 +118,5 @@ export async function mainFunction() {
 }
 
 mainFunction()
+
+// test
