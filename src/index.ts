@@ -1,16 +1,24 @@
 #!/usr/bin/env node
+import fs from 'fs'
 import inquirer from 'inquirer'
 import { installDependencies } from './scripts/installDependencies.js'
 import { modifyScripts } from './scripts/modifyScripts.js'
-import fs from 'fs'
 import { romeConfig } from './scripts/linter-formatters/rome.js'
 import { prettierConfig } from './scripts/linter-formatters/eslint-prettier.js'
 import { eslintConfig } from './scripts/linter-formatters/eslint-prettier.js'
 import { readFileSync } from 'fs'
-const { execSync } = require('child_process');
+import ora from 'ora'
+import { createPackageJson } from './scripts/createPackageJson.js'
+import { cloneRepo } from './scripts/cloneRepo.js'
 const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString())
 
 const questions = [
+  {
+    type: 'input',
+    name: 'projectName',
+    message: 'What is your project name?',
+    default: 'my-project',
+  },
   {
     type: 'list',
     name: 'linter',
@@ -64,13 +72,26 @@ Package Version: ${packageInfo.version}
   `)
   try {
     const answers = await inquirer.prompt(questions)
+    const directory = `./${answers.projectName}`
+    const spinner: any = ora('Adding package.json').start()
+    createPackageJson(answers.projectName, directory)
+    spinner.succeed()
+    const repoUrl = 'https://github.com/Seranged/EVM-FE-Bootstrap.git'
+    const branch = 'cli-base'
+    const spinnerRepo: any = ora('Installing base NextJS files').start()
+    await cloneRepo(repoUrl, branch, directory)
+    spinnerRepo.succeed()
     if (answers.linter === 'ESLint+Prettier') {
+      const spinner: any = ora('Adding and installing Eslint and Prettier...').start()
       await installDependencies(['eslint', 'prettier'])
-      fs.writeFileSync('.eslintrc.js', `module.exports = ${JSON.stringify(eslintConfig, null, 2)}`)
-      fs.writeFileSync('.prettierrc.json', JSON.stringify(prettierConfig, null, 2))
+      fs.writeFileSync(`${directory}/.eslintrc.js`, `module.exports = ${JSON.stringify(eslintConfig, null, 2)}`)
+      fs.writeFileSync(`${directory}/.prettierrc.json`, JSON.stringify(prettierConfig, null, 2))
+      spinner.succeed()
     } else if (answers.linter === 'Rome') {
+      const spinner: any = ora('Adding and installing Rome...').start()
       await installDependencies(['rome'])
-      fs.writeFileSync('rome.json', JSON.stringify(romeConfig, null, 2))
+      fs.writeFileSync(`${directory}/rome.json`, JSON.stringify(romeConfig, null, 2))
+      spinner.succeed()
     }
     // if (answers.typeChecker === 'AbiType') {
     //   fs.copyFileSync(
@@ -86,7 +107,6 @@ Package Version: ${packageInfo.version}
     if (answers.scripts && answers.scripts.length > 0) {
       await modifyScripts(answers.scripts)
     }
-
     console.log('EVM scaffolding CLI has finished running.')
   } catch (error) {
     console.error('An error occurred:', error)
