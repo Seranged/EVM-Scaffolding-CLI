@@ -20,6 +20,7 @@ import { eslintConfig } from './scripts/linter-formatters/eslint-prettier.js';
 import { createPackageJson } from './scripts/createPackageJson.js';
 import { cloneRepo } from './scripts/cloneRepo.js';
 import { RainbowKitNavbar } from './scripts/navbar/rainbowKitNavbar.js';
+import { FamilyKitNavbar } from './scripts/navbar/familyKitNavbar.js';
 const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString());
 const questions = [
     {
@@ -110,7 +111,13 @@ export function mainFunction() {
             if (answers.wallet === 'RainbowKit') {
                 const spinner = ora('Adding RainbowKit and a Navbar...').start();
                 yield installDependencies(['@rainbow-me/rainbowkit'], directory);
-                fs.writeFileSync(`${directory}/src/components/navbar/rainbowKitNavbar.tsx`, RainbowKitNavbar);
+                fs.writeFileSync(`${directory}/src/components/navbar/Navbar.tsx`, RainbowKitNavbar);
+                spinner.succeed();
+            }
+            if (answers.wallet === 'FamilyKit') {
+                const spinner = ora('Adding RainbowKit and a Navbar...').start();
+                yield installDependencies(['@rainbow-me/rainbowkit'], directory);
+                fs.writeFileSync(`${directory}/src/components/navbar/Navbar.tsx`, FamilyKitNavbar);
                 spinner.succeed();
             }
             // if (answers.typeChecker === 'AbiType') {
