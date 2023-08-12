@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Seranged-EVM-Bootstrap</title>
         <meta
           name='description'
-          content="Zoom Zoom"
+          content="Seranged EVM Bootstrap"
         />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.png' />
@@ -67,7 +67,7 @@ import { arbitrum, optimism } from '@wagmi/chains'
 import { configureChains, mainnet } from '@wagmi/core'
 import { publicProvider } from '@wagmi/core/providers/public'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
-import { getDefaultWallets, midnightTheme, RainbowKitProvider } from '@rainbow-me/rainbowkit'
+import { getDefaultWallets, RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit'
 import { Navbar } from '@/components/Navbar/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -97,14 +97,14 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Seranged-EVM-Bootstrap</title>
-        <meta name='description' content='Zoom Zoom' />
+        <meta name='description' content='Seranged EVM Bootstrap' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' type='image/png' sizes='64x64' href='/favicon.png' />
       </Head>
       {/* Place inter.className in the classname below to activate the font accross the entire application  */}
       <main className=''>
         <WagmiConfig config={config}>
-          <RainbowKitProvider chains={chains} modalSize='compact' theme={midnightTheme()}>
+          <RainbowKitProvider chains={chains} modalSize='compact' theme={darkTheme()}>
             <Navbar />
             <Component {...pageProps} />
           </RainbowKitProvider>

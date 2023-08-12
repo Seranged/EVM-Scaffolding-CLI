@@ -7,7 +7,7 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { mainnet, arbitrum } from 'wagmi/chains'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
-import { getDefaultWallets, RainbowKitProvider, midnightTheme } from '@rainbow-me/rainbowkit'
+import { getDefaultWallets, RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit'
 import { Navbar } from '@/components/Navbar/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -45,11 +45,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       {/* Place inter.className in the classname below to activate the font accross the entire application  */}
         <body className=''>
           <WagmiConfig config={config}>
-            <RainbowKitProvider chains={chains} modalSize='compact' theme={midnightTheme()}>
+            <RainbowKitProvider chains={chains} modalSize='compact' theme={darkTheme()}>
               <Navbar />
               {children}
             </RainbowKitProvider>
-          </WagmiConfig>
           </WagmiConfig>
         </body>
       </html>
