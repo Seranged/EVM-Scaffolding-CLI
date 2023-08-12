@@ -23,8 +23,10 @@ import { cloneRepo } from './scripts/cloneRepo.js';
 import { RainbowKitNavbar } from './scripts/navbar/rainbowKitNavbar.js';
 import { ConnectKitNavbar } from './scripts/navbar/connectKitNavbar.js';
 import { createPrettierIgnore } from './scripts/linter-formatters/eslint-prettier.js';
-import { appRouterRainbowKit, appRouterConnectKit } from './scripts/nextjs-routers/app.js';
-import { pagesRouterRainbowKit, pagesRouterConnectKit } from './scripts/nextjs-routers/pages.js';
+import { appRouterRainbowKit, appRouterConnectKit } from './scripts/nextjs-routers/app/app.js';
+import { pagesRouterRainbowKit, pagesRouterConnectKit } from './scripts/nextjs-routers/pages/pages.js';
+import { page404 } from './scripts/nextjs-routers/404.js';
+import { homePage } from './scripts/nextjs-routers/homePage.js';
 const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString());
 const questions = [
     {
@@ -115,39 +117,47 @@ export function mainFunction() {
             if (answers.wallet === 'RainbowKit') {
                 const spinner = ora('Adding RainbowKit and a Navbar...').start();
                 yield installDependencies(['@rainbow-me/rainbowkit'], directory);
-                fs.mkdirSync(path.join(directory, 'src', 'components', 'navbar'), { recursive: true });
-                fs.writeFileSync(path.join(directory, 'src', 'components', 'navbar', 'Navbar.tsx'), RainbowKitNavbar);
+                fs.mkdirSync(path.join(directory, 'src', 'components', 'Navbar'), { recursive: true });
+                fs.writeFileSync(path.join(directory, 'src', 'components', 'Navbar', 'Navbar.tsx'), RainbowKitNavbar);
                 spinner.succeed();
             }
             if (answers.wallet === 'ConnectKit') {
                 const spinner = ora('Adding RainbowKit and a Navbar...').start();
                 yield installDependencies(['connectkit'], directory);
-                fs.mkdirSync(path.join(directory, 'src', 'components', 'navbar'), { recursive: true });
-                fs.writeFileSync(path.join(directory, 'src', 'components', 'navbar', 'Navbar.tsx'), ConnectKitNavbar);
+                fs.mkdirSync(path.join(directory, 'src', 'components', 'Navbar'), { recursive: true });
+                fs.writeFileSync(path.join(directory, 'src', 'components', 'Navbar', 'Navbar.tsx'), ConnectKitNavbar);
                 spinner.succeed();
             }
             if (answers.wallet === 'ConnectKit' && answers.router === 'App Router') {
                 const spinner = ora('Adding ConnectKit App Router...').start();
                 fs.mkdirSync(path.join(directory, 'src', 'app'), { recursive: true });
                 fs.writeFileSync(path.join(directory, 'src', 'app', 'layout.tsx'), appRouterConnectKit);
+                fs.writeFileSync(path.join(directory, 'src', 'app', 'not-found.tsx'), page404);
+                fs.writeFileSync(path.join(directory, 'src', 'app', 'page.tsx'), homePage);
                 spinner.succeed();
             }
             if (answers.wallet === 'RainbowKit' && answers.router === 'App Router') {
                 const spinner = ora('Adding RainbowKit App Router...').start();
                 fs.mkdirSync(path.join(directory, 'src', 'app'), { recursive: true });
                 fs.writeFileSync(path.join(directory, 'src', 'app', 'layout.tsx'), appRouterRainbowKit);
+                fs.writeFileSync(path.join(directory, 'src', 'app', 'not-found.tsx'), page404);
+                fs.writeFileSync(path.join(directory, 'src', 'app', 'page.tsx'), homePage);
                 spinner.succeed();
             }
             if (answers.wallet === 'ConnectKit' && answers.router === 'Pages Router') {
                 const spinner = ora('Adding ConnectKit App Router...').start();
                 fs.mkdirSync(path.join(directory, 'src', 'app'), { recursive: true });
                 fs.writeFileSync(path.join(directory, 'src', 'pages', '_app.tsx'), pagesRouterConnectKit);
+                fs.writeFileSync(path.join(directory, 'src', 'app', '404.tsx'), page404);
+                fs.writeFileSync(path.join(directory, 'src', 'app', 'index.tsx'), homePage);
                 spinner.succeed();
             }
             if (answers.wallet === 'RainbowKit' && answers.router === 'Pages Router') {
                 const spinner = ora('Adding RainbowKit App Router...').start();
                 fs.mkdirSync(path.join(directory, 'src', 'app'), { recursive: true });
                 fs.writeFileSync(path.join(directory, 'src', 'pages', '_app.tsx'), pagesRouterRainbowKit);
+                fs.writeFileSync(path.join(directory, 'src', 'app', '404.tsx'), page404);
+                fs.writeFileSync(path.join(directory, 'src', 'app', 'index.tsx'), homePage);
                 spinner.succeed();
             }
             // if (answers.typeChecker === 'AbiType') {
