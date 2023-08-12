@@ -28,7 +28,7 @@ import { page404 } from './scripts/nextjs-routers/404.js';
 import { homePage } from './scripts/nextjs-routers/homePage.js';
 import { createReadme } from './scripts/createReadme.js';
 import { daisyUIConfig } from './scripts/uiKit/daisyUI.js';
-import { shadcnComponentsJson, shadcnTailwindConfig, shadcnCnLibFunction, shadcnGlobalCSS } from './scripts/uiKit/shadcn.js';
+import { shadcnComponentsJson, shadcnTailwindConfig, shadcnCnLibFunction, shadcnGlobalCSS, } from './scripts/uiKit/shadcn.js';
 import { removeGitRemoteOrigin } from './scripts/functions/gitRemoteRemove.js';
 const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString());
 const questions = [
@@ -64,7 +64,7 @@ const questions = [
         name: 'uiKit',
         default: ['Shadcn'],
         message: 'Which UI framework do you want to use alongside tailwind?',
-        choices: ['Shadcn', 'DaisyUI', 'Flowbite', 'None'],
+        choices: ['Shadcn', 'DaisyUI', 'None'],
     },
     // {
     //   type: 'list',
@@ -172,11 +172,6 @@ export function mainFunction() {
                 fs.writeFileSync(path.join(directory, 'src', 'styles', 'globals.css'), shadcnGlobalCSS);
                 fs.writeFileSync(path.join(directory, 'tailwind.config.js'), shadcnTailwindConfig);
                 fs.writeFileSync(path.join(directory, 'components.json'), shadcnComponentsJson);
-                spinner.succeed();
-            }
-            if (answers.uiKit === 'Flowbite') {
-                const spinner = ora('Adding Flowbite and configuration files...').start();
-                yield installDependencies(['Flowbite@latest'], directory);
                 spinner.succeed();
             }
             console.log('EVM scaffolding CLI has finished running.');

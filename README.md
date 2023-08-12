@@ -16,7 +16,7 @@ When you run the CLI, it will ask you a series of questions to determine how to 
 2. **Linter/Formatter**: Choose between 'Rome' and 'ESLint and Prettier'.
 3. **Nextjs router**: Choose between 'App Router' and 'Pages Router'.
 4. **Wallet connection handler**: Choose between 'RainbowKit' and 'ConnectKit'.
-5. **UI framework**: Choose between 'Shadcn', 'Flowbite', 'DaisyUI' or 'None' to use alongside Tailwind.
+5. **UI framework**: Choose between 'Shadcn', 'DaisyUI' or 'None' to use alongside Tailwind.
 
 Based on your responses, the CLI will perform the following actions:
 
