@@ -1,15 +1,26 @@
 import fs from 'fs';
-export function createPackageJson(projectName, directory) {
+export function createPackageJson(projectName, directory, linter) {
+    const scripts = {
+        dev: 'next dev',
+        build: 'next build',
+        start: 'next start',
+    };
+    if (linter === 'Rome') {
+        scripts.lint = 'pnpm rome check src --apply';
+        scripts.format = 'pnpm rome format src --write';
+    }
+    else if (linter === 'ESLint and Prettier') {
+        scripts.lint = 'next lint';
+        scripts.format = 'prettier --write . --ignore-path .gitignore';
+    }
+    else if (linter === 'None') {
+    }
     fs.writeFileSync(`${directory}/package.json`, JSON.stringify({
         name: projectName,
         author: 'Seranged',
         license: 'MIT',
         version: '0.1.0',
-        scripts: {
-            dev: 'next dev',
-            build: 'next build',
-            start: 'next start',
-        },
+        scripts,
         dependencies: {
             '@types/node': '20.4.7',
             '@types/react': '18.2.18',

@@ -5,14 +5,14 @@ export function createPackageJson(projectName: string, directory: string, linter
     dev: 'next dev',
     build: 'next build',
     start: 'next start',
-  };
+  }
 
   if (linter === 'Rome') {
-    scripts.lint = 'pnpm rome check src --apply';
-    scripts.format = 'pnpm rome format src --write';
+    scripts.lint = 'pnpm rome check src --apply'
+    scripts.format = 'pnpm rome format src --write'
   } else if (linter === 'ESLint and Prettier') {
-    scripts.lint = 'next lint';
-    scripts.format = 'prettier --write . --ignore-path .gitignore';
+    scripts.lint = 'next lint'
+    scripts.format = 'prettier --write . --ignore-path .gitignore'
   } else if (linter === 'None') {
   }
 
