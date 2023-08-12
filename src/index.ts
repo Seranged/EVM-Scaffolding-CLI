@@ -3,6 +3,7 @@ import fs from 'fs'
 import { readFileSync } from 'fs'
 import ora from 'ora'
 import inquirer from 'inquirer'
+import path from 'path'
 import { installDependencies } from './scripts/installDependencies.js'
 import { modifyScripts } from './scripts/modifyScripts.js'
 import { romeConfig } from './scripts/linter-formatters/rome.js'
@@ -85,7 +86,7 @@ export async function mainFunction() {
     await cloneRepo(repoUrl, branch, directory)
     spinnerRepo.succeed()
     const spinnerInstall: any = ora('Installing base dependencies').start()
-    await createPackageJson(answers.projectName, directory)
+    await createPackageJson(answers.projectName, directory, answers.linter)
     await installDependencies([], directory)
     spinnerInstall.succeed()
     if (answers.linter === 'ESLint and Prettier') {
@@ -103,13 +104,15 @@ export async function mainFunction() {
     if (answers.wallet === 'RainbowKit') {
       const spinner: any = ora('Adding RainbowKit and a Navbar...').start()
       await installDependencies(['@rainbow-me/rainbowkit'], directory)
-      fs.writeFileSync(`${directory}/src/components/navbar/Navbar.tsx`, RainbowKitNavbar)
+      fs.mkdirSync(path.join(directory, 'src', 'components', 'navbar'), { recursive: true })
+      fs.writeFileSync(path.join(directory, 'src', 'components', 'navbar', 'Navbar.tsx'), RainbowKitNavbar)
       spinner.succeed()
     }
     if (answers.wallet === 'FamilyKit') {
       const spinner: any = ora('Adding RainbowKit and a Navbar...').start()
-      await installDependencies(['@rainbow-me/rainbowkit'], directory)
-      fs.writeFileSync(`${directory}/src/components/navbar/Navbar.tsx`, FamilyKitNavbar)
+      await installDependencies(['connectkit'], directory)
+      fs.mkdirSync(path.join(directory, 'src', 'components', 'navbar'), { recursive: true })
+      fs.writeFileSync(path.join(directory, 'src', 'components', 'navbar', 'Navbar.tsx'), FamilyKitNavbar)
       spinner.succeed()
     }
     // if (answers.typeChecker === 'AbiType') {
