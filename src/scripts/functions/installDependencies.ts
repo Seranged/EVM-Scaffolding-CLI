@@ -3,7 +3,7 @@ import { exec } from 'child_process'
 export function installDependencies(dependencies: string[], directory: string): Promise<void> {
   return new Promise((resolve, reject) => {
     const pnpmInstall = exec(
-      `cd ${directory.replace('./', '')} && pnpm install -w ${dependencies.join(' ')}`,
+      `cd ${directory.replace('./', '')} && pnpm install ${dependencies.join(' ')}`,
       (error: any, stdout: any, stderr: any) => {
         if (error) {
           console.error(`exec error: ${error}`)
