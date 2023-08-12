@@ -158,15 +158,19 @@ export async function mainFunction() {
     if (answers.uiKit === 'DaisyUI') {
       const spinner: any = ora('Adding DaisyUI and configuration files...').start()
       await installDependencies(['daisyui@latest'], directory)
-      fs.writeFileSync(`${directory}/tailwind.config.js`, `module.exports = ${JSON.stringify(daisyUIConfig, null, 2)}`)
+      fs.writeFileSync(path.join(directory, 'tailwind.config.js'), daisyUIConfig)
+
       spinner.succeed()
     }
 
     if (answers.uiKit === 'Shadcn') {
       const spinner: any = ora('Adding Shadcn and configuration files...').start()
-      await installDependencies(['shadcn-ui', 'clsx', 'tailwind-merge', 'tailwindcss-animate', 'class-variance-authority'], directory)
+      await installDependencies(['shadcn-ui', 'clsx', 'tailwind-merge', 'tailwindcss-animate', 'class-variance-authority', 'lucide-react'], directory)
       fs.mkdirSync(path.join(directory, 'src', 'lib'), { recursive: true })
       fs.writeFileSync(path.join(directory, 'src', 'lib', 'utils.ts'), shadcnCnLibFunction)
+      fs.writeFileSync(path.join(directory, 'tailwind.config.js'), shadcnTailwindConfig)
+      fs.writeFileSync(path.join(directory, 'components.json'), shadcnComponentsJson)
+
       fs.writeFileSync(`${directory}/tailwind.config.js`, `module.exports = ${JSON.stringify(shadcnTailwindConfig, null, 2)}`)
       fs.writeFileSync(`${directory}/components.json`, `module.exports = ${JSON.stringify(shadcnComponentsJson, null, 2)}`)
 

@@ -44,10 +44,11 @@ export function createPackageJson(projectName, directory, linter) {
             abitype: yield latestVersion('abitype'),
         };
         fs.writeFileSync(`${directory}/package.json`, JSON.stringify({
-            name: projectName,
+            name: projectName.toLowerCase(),
             author: 'Seranged',
             license: 'MIT',
             version: `${packageInfo.version}`,
+            private: true,
             scripts,
             dependencies,
         }, null, 2));

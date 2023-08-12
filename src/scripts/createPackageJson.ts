@@ -39,10 +39,11 @@ export async function createPackageJson(projectName: string, directory: string, 
     `${directory}/package.json`,
     JSON.stringify(
       {
-        name: projectName,
+        name: projectName.toLowerCase(),
         author: 'Seranged',
         license: 'MIT',
         version: `${packageInfo.version}`,
+        private: true,
         scripts,
         dependencies,
       },
