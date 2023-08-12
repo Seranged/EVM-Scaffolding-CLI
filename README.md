@@ -1,64 +1,28 @@
 # EVM Scaffolding CLI
 
-A CLI frontend repo for EVM scaffolding that allows users to choose dependencies to install and modifies scripts based on user input.
+EVM Scaffolding CLI is a command-line interface tool that helps you bootstrap EVM projects based against your preferences. It provides a simple and interactive way to set up your project with the components you need.
 
-## Getting Started
+## Installation
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+You don't need to install the CLI globally. You can use `npx` to run it without installing:
 
-### Prerequisites
+`npx evm-scaffolding-cli`
 
-You need Node.js installed on your machine to run this project. You can download Node.js from [here](https://nodejs.org/).
+## Usage
 
-### Installing
+When you run the CLI, it will ask you a series of questions to determine how to set up your project:
 
-Clone the repository to your local machine:
+1. **Project name**: The name of your new project.
+2. **Linter/Formatter**: Choose between 'Rome' and 'ESLint and Prettier'.
+3. **Nextjs router**: Choose between 'App Router' and 'Pages Router'.
+4. **Wallet connection handler**: Choose between 'RainbowKit' and 'ConnectKit'.
+5. **UI framework**: Choose between 'Shadcn', 'Flowbite', 'DaisyUI' or 'None' to use alongside Tailwind.
 
-```
-git clone `placeholder`
-```
+Based on your responses, the CLI will perform the following actions:
 
-Navigate to the project directory:
+- Create a new directory with the name of your project.
+- Generate a `package.json` file.
+- Install the necessary dependencies.
+- Set up initial components and logic.
 
-```
-cd evm-scaffolding-cli
-```
-
-Install the dependencies:
-
-```
-npm install
-```
-
-### Usage
-
-To start the application, run:
-
-```
-npm start
-```
-
-Follow the prompts in the CLI to choose the dependencies you want to install.
-
-## Running the tests
-
-To run the tests, use:
-
-```
-npm test
-```
-
-## Built With
-
-* [Inquirer](https://www.npmjs.com/package/inquirer) - A collection of common interactive command line user interfaces.
-* [Jest](https://jestjs.io/) - A delightful JavaScript Testing Framework with a focus on simplicity.
-* [ESLint](https://eslint.org/) - A tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
-* [Prettier](https://prettier.io/) - An opinionated code formatter.
-
-## Authors
-
-* **Seranged** - [Seranged](https://github.com/Seranged)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/seranged/evm-scaffolding-cli/LICENSE.md) file for details
+This setup allows you to quickly start building onchain applications.

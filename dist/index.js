@@ -28,7 +28,7 @@ import { page404 } from './scripts/nextjs-routers/404.js';
 import { homePage } from './scripts/nextjs-routers/homePage.js';
 import { createReadme } from './scripts/createReadme.js';
 import { daisyUIConfig } from './scripts/uiKit/daisyUI.js';
-import { shadcnComponentsJson, shadcnTailwindConfig, shadcnCnLibFunction } from './scripts/uiKit/shadcn.js';
+import { shadcnComponentsJson, shadcnTailwindConfig, shadcnCnLibFunction, shadcnGlobalCSS } from './scripts/uiKit/shadcn.js';
 const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString());
 const questions = [
     {
@@ -63,7 +63,7 @@ const questions = [
         name: 'uiKit',
         default: ['Shadcn'],
         message: 'Which UI framework do you want to use alongside tailwind?',
-        choices: ['Shadcn', 'Flowbite', 'DaisyUI'],
+        choices: ['Shadcn', 'DaisyUI', 'Flowbite', 'None'],
     },
     // {
     //   type: 'list',
@@ -167,6 +167,7 @@ export function mainFunction() {
                 yield installDependencies(['shadcn-ui', 'clsx', 'tailwind-merge', 'tailwindcss-animate', 'class-variance-authority', 'lucide-react'], directory);
                 fs.mkdirSync(path.join(directory, 'src', 'lib'), { recursive: true });
                 fs.writeFileSync(path.join(directory, 'src', 'lib', 'utils.ts'), shadcnCnLibFunction);
+                fs.writeFileSync(path.join(directory, 'src', 'styles', 'globals.css'), shadcnGlobalCSS);
                 fs.writeFileSync(path.join(directory, 'tailwind.config.js'), shadcnTailwindConfig);
                 fs.writeFileSync(path.join(directory, 'components.json'), shadcnComponentsJson);
                 spinner.succeed();
