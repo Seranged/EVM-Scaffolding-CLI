@@ -1,6 +1,6 @@
 {
   "name": "evm-scaffolding-cli",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "A CLI frontend repo for EVM scaffolding that allows users to choose dependencies to install and modifies scripts based on user input.",
   "main": "dist/index.js",
   "type": "module",
