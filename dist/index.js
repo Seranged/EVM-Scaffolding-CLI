@@ -100,7 +100,7 @@ export function mainFunction() {
             const spinnerInstall = ora('Installing base dependencies').start();
             yield createPackageJson(answers.projectName, directory, answers.linter);
             yield installDependencies([], directory);
-            fs.writeFileSync('README.md', createReadme(answers.wallet, answers.linter));
+            fs.writeFileSync(`${directory}/README.md`, createReadme(answers.wallet, answers.linter));
             spinnerInstall.succeed();
             if (answers.linter === 'ESLint and Prettier') {
                 const spinner = ora('Adding and installing Eslint and Prettier...').start();
