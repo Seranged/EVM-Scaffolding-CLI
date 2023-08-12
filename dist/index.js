@@ -29,6 +29,7 @@ import { homePage } from './scripts/nextjs-routers/homePage.js';
 import { createReadme } from './scripts/createReadme.js';
 import { daisyUIConfig } from './scripts/uiKit/daisyUI.js';
 import { shadcnComponentsJson, shadcnTailwindConfig, shadcnCnLibFunction, shadcnGlobalCSS } from './scripts/uiKit/shadcn.js';
+import { removeGitRemoteOrigin } from './scripts/functions/gitRemoteRemove.js';
 const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString());
 const questions = [
     {
@@ -90,6 +91,7 @@ export function mainFunction() {
             const repoUrl = 'https://github.com/Seranged/EVM-Scaffold-Base-Application.git';
             const spinnerRepo = ora('Installing base NextJS files').start();
             yield cloneRepo(repoUrl, directory);
+            yield removeGitRemoteOrigin();
             fs.writeFileSync(`${directory}/README.md`, createReadme(answers.wallet, answers.linter));
             spinnerRepo.succeed();
             const spinnerInstall = ora('Installing base dependencies').start();
