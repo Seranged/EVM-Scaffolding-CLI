@@ -27,6 +27,7 @@ import { appRouterRainbowKit, appRouterConnectKit } from './scripts/nextjs-route
 import { pagesRouterRainbowKit, pagesRouterConnectKit } from './scripts/nextjs-routers/pages/pages.js';
 import { page404 } from './scripts/nextjs-routers/404.js';
 import { homePage } from './scripts/nextjs-routers/homePage.js';
+import { createReadme } from './scripts/createReadme.js';
 const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString());
 const questions = [
     {
@@ -99,6 +100,7 @@ export function mainFunction() {
             const spinnerInstall = ora('Installing base dependencies').start();
             yield createPackageJson(answers.projectName, directory, answers.linter);
             yield installDependencies([], directory);
+            fs.writeFileSync('README.md', createReadme(answers.wallet, answers.linter));
             spinnerInstall.succeed();
             if (answers.linter === 'ESLint and Prettier') {
                 const spinner = ora('Adding and installing Eslint and Prettier...').start();
