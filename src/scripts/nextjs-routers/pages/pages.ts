@@ -1,4 +1,4 @@
-export const pagesRouterConnectKit = `import '@/styles/styles.css'
+export const pagesRouterConnectKit = `import '@/styles/globals.css'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
@@ -57,13 +57,13 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 `
 export const pagesRouterRainbowKit = `
-import '@/styles/styles.css'
+import '@/styles/globals.css'
 import '@rainbow-me/rainbowkit/styles.css'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 import { createConfig, WagmiConfig } from 'wagmi'
-import { arbitrum, optimism } from '@wagmi/chains'
+import { mainnet, arbitrum } from '@wagmi/chains'
 import { configureChains, mainnet } from '@wagmi/core'
 import { publicProvider } from '@wagmi/core/providers/public'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
@@ -75,7 +75,7 @@ const inter = Inter({ subsets: ['latin'] })
 const alchemyId = process.env.ALCHEMY_API_KEY
 
 const { chains, publicClient } = configureChains(
-  [mainnet, optimism, arbitrum],
+  [mainnet, arbitrum],
   [alchemyProvider({ apiKey: alchemyId }), publicProvider()],
 )
 const projectId = 'WalletConnectAPIKey(NeedsReplacing)'
