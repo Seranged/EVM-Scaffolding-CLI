@@ -12,7 +12,7 @@ import { eslintConfig } from './scripts/linter-formatters/eslint-prettier.js'
 import { createPackageJson } from './scripts/createPackageJson.js'
 import { cloneRepo } from './scripts/cloneRepo.js'
 import { RainbowKitNavbar } from './scripts/navbar/rainbowKitNavbar.js'
-import { FamilyKitNavbar } from './scripts/navbar/familyKitNavbar.js'
+import { ConnectKitNavbar } from './scripts/navbar/connectKitNavbar.js'
 import { createPrettierIgnore } from './scripts/linter-formatters/eslint-prettier.js'
 
 const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString())
@@ -43,7 +43,7 @@ const questions = [
     name: 'wallet',
     default: ['RainbowKit'],
     message: 'Which wallet connection handler do you want to use?',
-    choices: ['RainbowKit', 'FamilyKit', 'None'],
+    choices: ['RainbowKit', 'ConnectKit', 'None'],
   },
   // {
   //   type: 'list',
@@ -110,11 +110,11 @@ export async function mainFunction() {
       fs.writeFileSync(path.join(directory, 'src', 'components', 'navbar', 'Navbar.tsx'), RainbowKitNavbar)
       spinner.succeed()
     }
-    if (answers.wallet === 'FamilyKit') {
+    if (answers.wallet === 'ConnectKit') {
       const spinner: any = ora('Adding RainbowKit and a Navbar...').start()
       await installDependencies(['connectkit'], directory)
       fs.mkdirSync(path.join(directory, 'src', 'components', 'navbar'), { recursive: true })
-      fs.writeFileSync(path.join(directory, 'src', 'components', 'navbar', 'Navbar.tsx'), FamilyKitNavbar)
+      fs.writeFileSync(path.join(directory, 'src', 'components', 'navbar', 'Navbar.tsx'), ConnectKitNavbar)
       spinner.succeed()
     }
     // if (answers.typeChecker === 'AbiType') {
