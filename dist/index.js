@@ -22,6 +22,7 @@ import { createPackageJson } from './scripts/createPackageJson.js';
 import { cloneRepo } from './scripts/cloneRepo.js';
 import { RainbowKitNavbar } from './scripts/navbar/rainbowKitNavbar.js';
 import { FamilyKitNavbar } from './scripts/navbar/familyKitNavbar.js';
+import { createPrettierIgnore } from './scripts/linter-formatters/eslint-prettier.js';
 const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString());
 const questions = [
     {
@@ -101,6 +102,7 @@ export function mainFunction() {
                 yield installDependencies(['eslint', 'prettier'], directory);
                 fs.writeFileSync(`${directory}/.eslintrc.js`, `module.exports = ${JSON.stringify(eslintConfig, null, 2)}`);
                 fs.writeFileSync(`${directory}/.prettierrc.json`, JSON.stringify(prettierConfig, null, 2));
+                createPrettierIgnore(directory);
                 spinner.succeed();
             }
             else if (answers.linter === 'Rome') {

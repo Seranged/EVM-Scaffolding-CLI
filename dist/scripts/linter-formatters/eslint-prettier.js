@@ -1,3 +1,4 @@
+import fs from 'fs';
 export const eslintConfig = {
     root: true,
     parser: '@typescript-eslint/parser',
@@ -11,3 +12,12 @@ export const prettierConfig = {
     singleQuote: true,
     printWidth: 120,
 };
+export function createPrettierIgnore(directory) {
+    const ignorePatterns = [
+        '# Ignore artifacts:',
+        'build',
+        'coverage',
+        'node_modules',
+    ].join('\n');
+    fs.writeFileSync(`${directory}/.prettierignore`, ignorePatterns);
+}
