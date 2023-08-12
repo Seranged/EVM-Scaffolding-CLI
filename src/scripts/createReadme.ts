@@ -30,6 +30,7 @@ export const createReadme = (walletHandler: string, linterFormatter: string) => 
     '- [Tailwind](https://github.com/tailwindlabs/tailwindcss)',
     '- [WAGMI](https://github.com/wagmi-dev/wagmi)',
     '- [Viem](https://github.com/wagmi-dev/viem)',
+    '- [ABItype](https://github.com/wagmi-dev/abitype)',
     '- [Typescript](https://github.com/microsoft/TypeScript)',
   ]
     .filter(Boolean)

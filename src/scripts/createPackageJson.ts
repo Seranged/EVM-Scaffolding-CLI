@@ -32,6 +32,7 @@ export async function createPackageJson(projectName: string, directory: string, 
     typescript: await latestVersion('typescript'),
     viem: await latestVersion('viem'),
     wagmi: await latestVersion('wagmi'),
+    abitype: await latestVersion('abitype'),
   }
 
   fs.writeFileSync(

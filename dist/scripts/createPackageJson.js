@@ -41,6 +41,7 @@ export function createPackageJson(projectName, directory, linter) {
             typescript: yield latestVersion('typescript'),
             viem: yield latestVersion('viem'),
             wagmi: yield latestVersion('wagmi'),
+            abitype: yield latestVersion('abitype'),
         };
         fs.writeFileSync(`${directory}/package.json`, JSON.stringify({
             name: projectName,

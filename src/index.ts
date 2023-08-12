@@ -58,13 +58,6 @@ const questions = [
   // },
   // {
   //   type: 'list',
-  //   name: 'typeChecker',
-  //   default: ['AbiType'],
-  //   message: 'Which EVM contract type checker do you want to use?',
-  //   choices: ['AbiType', 'TypeChain'],
-  // },
-  // {
-  //   type: 'list',
   //   name: 'stateManager',
   //   message: 'Which global state manager do you want to use?',
   //   choices: ['Redux', 'Zustand', 'None'],
@@ -160,13 +153,6 @@ export async function mainFunction() {
       spinner.succeed()
     }
 
-    // if (answers.typeChecker === 'AbiType') {
-    //   fs.copyFileSync(
-    //     path.join(__dirname, './scripts/nextjs/evmTypescript/functions/readContract.ts'),
-    //     path.join(process.cwd(), './src/contracts/readContract.ts'),
-    //   )
-    // }
-
     console.log('EVM scaffolding CLI has finished running.')
   } catch (error) {
     console.error('An error occurred:', error)
@@ -174,5 +160,3 @@ export async function mainFunction() {
 }
 
 mainFunction()
-
-// test
