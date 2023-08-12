@@ -148,16 +148,16 @@ export function mainFunction() {
                 const spinner = ora('Adding ConnectKit Pages Router...').start();
                 fs.mkdirSync(path.join(directory, 'src', 'pages'), { recursive: true });
                 fs.writeFileSync(path.join(directory, 'src', 'pages', '_app.tsx'), pagesRouterConnectKit);
-                fs.writeFileSync(path.join(directory, 'src', 'app', '404.tsx'), page404);
-                fs.writeFileSync(path.join(directory, 'src', 'app', 'index.tsx'), homePage);
+                fs.writeFileSync(path.join(directory, 'src', 'pages', '404.tsx'), page404);
+                fs.writeFileSync(path.join(directory, 'src', 'pages', 'index.tsx'), homePage);
                 spinner.succeed();
             }
             if (answers.wallet === 'RainbowKit' && answers.router === 'Pages Router') {
                 const spinner = ora('Adding RainbowKit Pages Router...').start();
                 fs.mkdirSync(path.join(directory, 'src', 'pages'), { recursive: true });
                 fs.writeFileSync(path.join(directory, 'src', 'pages', '_app.tsx'), pagesRouterRainbowKit);
-                fs.writeFileSync(path.join(directory, 'src', 'app', '404.tsx'), page404);
-                fs.writeFileSync(path.join(directory, 'src', 'app', 'index.tsx'), homePage);
+                fs.writeFileSync(path.join(directory, 'src', 'pages', '404.tsx'), page404);
+                fs.writeFileSync(path.join(directory, 'src', 'pages', 'index.tsx'), homePage);
                 spinner.succeed();
             }
             // if (answers.typeChecker === 'AbiType') {
