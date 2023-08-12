@@ -18,26 +18,29 @@ export const createReadme = (walletHandler, linterFormatter) => {
         const romeUrl = 'https://github.com/rome/tools';
         romeLink = `- [Rome](${romeUrl})`;
     }
+    const stack = [
+        '- [Next.js](https://github.com/vercel/next.js)',
+        `- [${walletHandler}](${walletUrl})`,
+        linterLink,
+        formatterLink,
+        romeLink,
+        '- [Tailwind](https://github.com/tailwindlabs/tailwindcss)',
+        '- [WAGMI](https://github.com/wagmi-dev/wagmi)',
+        '- [Viem](https://github.com/wagmi-dev/viem)',
+        '- [Typescript](https://github.com/microsoft/TypeScript)',
+    ].filter(Boolean).join('\n');
     return `# EVM-FE-Bootstrap Repo [![twitter URL](https://img.shields.io/twitter/url/https/twitter.com/seranged.svg?style=social&label=Follow%20%40seranged)](https://twitter.com/seranged)
-  
-  Thank you for using my EVM-FE-Bootstrap CLI prompter!
-  
-  ## Stack
-  
-  - [Next.js](https://github.com/vercel/next.js)
-  - [${walletHandler}](${walletUrl})
-  ${linterLink}
-  ${formatterLink}
-  ${romeLink}
-  - [Tailwind](https://github.com/tailwindlabs/tailwindcss)
-  - [WAGMI](https://github.com/wagmi-dev/wagmi)
-  - [Viem](https://github.com/wagmi-dev/viem)
-  - [Typescript](https://github.com/microsoft/TypeScript)
-  
-  ## Getting Started
-  
-  1. Run pnpm install to install dependencies.
-  2. Create .env.local file in root and add ALCHEMY_API_KEY
-  3. Run pnpm dev to begin developing.
-  `;
+    
+    Thank you for using my EVM-FE-Bootstrap CLI prompter!
+    
+    ## Stack
+    
+    ${stack}
+    
+    ## Getting Started
+    
+    1. Run pnpm install to install dependencies.
+    2. Create .env.local file in root and add ALCHEMY_API_KEY
+    3. Run pnpm dev to begin developing.
+    `;
 };
