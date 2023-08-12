@@ -1,4 +1,4 @@
-const { exec } = require('child_process');
+import { exec } from 'child_process';
 export function removeGitRemoteOrigin() {
     exec('git remote remove origin', (error, stdout, stderr) => {
         if (error) {
