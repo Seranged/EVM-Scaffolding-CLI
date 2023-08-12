@@ -1,4 +1,4 @@
-export const createReadme = (walletHandler: string, linterFormatter: string) => {
+export const createReadme = (walletHandler: string, linterFormatter: string, uiKit: string) => {
   const walletUrl =
     walletHandler === 'RainbowKit'
       ? 'https://github.com/rainbow-me/rainbowkit'
@@ -21,11 +21,22 @@ export const createReadme = (walletHandler: string, linterFormatter: string) => 
     romeLink = `- [Rome](${romeUrl})`
   }
 
+  let uiKitLink = ''
+
+  if (uiKit === 'Shadcn') {
+    const uiKitUrl = 'https://github.com/shadcn-ui/ui'
+    uiKitLink = `- [${uiKit}](${uiKitUrl})`
+  } else if (uiKit === 'DaisyUI') {
+    const uiKitUrl = 'https://github.com/saadeghi/daisyui'
+    uiKitLink = `- [${uiKit}](${uiKitUrl})`
+  }
+
   const stack = [
     '- [Next.js](https://github.com/vercel/next.js)',
     `- [${walletHandler}](${walletUrl})`,
     linterLink,
     formatterLink,
+    uiKitLink,
     romeLink,
     '- [Tailwind](https://github.com/tailwindlabs/tailwindcss)',
     '- [WAGMI](https://github.com/wagmi-dev/wagmi)',

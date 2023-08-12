@@ -90,7 +90,7 @@ export async function mainFunction() {
     const spinnerRepo: any = ora('Installing base NextJS files').start()
     await cloneRepo(repoUrl, directory)
     await removeGitRemoteOrigin(directory)
-    fs.writeFileSync(`${directory}/README.md`, createReadme(answers.wallet, answers.linter))
+    fs.writeFileSync(`${directory}/README.md`, createReadme(answers.wallet, answers.linter, answers.uiKit))
     spinnerRepo.succeed()
     const spinnerInstall: any = ora('Installing base dependencies').start()
     await createPackageJson(answers.projectName, directory, answers.linter)

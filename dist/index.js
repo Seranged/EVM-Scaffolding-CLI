@@ -92,7 +92,7 @@ export function mainFunction() {
             const spinnerRepo = ora('Installing base NextJS files').start();
             yield cloneRepo(repoUrl, directory);
             yield removeGitRemoteOrigin(directory);
-            fs.writeFileSync(`${directory}/README.md`, createReadme(answers.wallet, answers.linter));
+            fs.writeFileSync(`${directory}/README.md`, createReadme(answers.wallet, answers.linter, answers.uiKit));
             spinnerRepo.succeed();
             const spinnerInstall = ora('Installing base dependencies').start();
             yield createPackageJson(answers.projectName, directory, answers.linter);
