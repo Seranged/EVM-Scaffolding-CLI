@@ -171,9 +171,6 @@ export async function mainFunction() {
       fs.writeFileSync(path.join(directory, 'tailwind.config.js'), shadcnTailwindConfig)
       fs.writeFileSync(path.join(directory, 'components.json'), shadcnComponentsJson)
 
-      fs.writeFileSync(`${directory}/tailwind.config.js`, `module.exports = ${JSON.stringify(shadcnTailwindConfig, null, 2)}`)
-      fs.writeFileSync(`${directory}/components.json`, `module.exports = ${JSON.stringify(shadcnComponentsJson, null, 2)}`)
-
       spinner.succeed()
     }
 
