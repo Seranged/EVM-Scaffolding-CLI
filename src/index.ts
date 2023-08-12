@@ -14,6 +14,9 @@ import { cloneRepo } from './scripts/cloneRepo.js'
 import { RainbowKitNavbar } from './scripts/navbar/rainbowKitNavbar.js'
 import { ConnectKitNavbar } from './scripts/navbar/connectKitNavbar.js'
 import { createPrettierIgnore } from './scripts/linter-formatters/eslint-prettier.js'
+import { appRouterRainbowKit, appRouterConnectKit } from './scripts/nextjs-routers/app.js';
+import { pagesRouterRainbowKit, pagesRouterConnectKit } from './scripts/nextjs-routers/pages.js';
+
 
 const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString())
 
@@ -31,13 +34,13 @@ const questions = [
     default: ['Rome'],
     choices: ['Rome', 'ESLint and Prettier', 'None'],
   },
-  // {
-  //   type: 'list',
-  //   name: 'router',
-  //   default: ['App Router'],
-  //   message: 'Which Nextjs router do you want to use?',
-  //   choices: ['App Router', 'Pages Router'],
-  // },
+  {
+    type: 'list',
+    name: 'router',
+    default: ['App Router'],
+    message: 'Which Nextjs router do you want to use?',
+    choices: ['App Router', 'Pages Router'],
+  },
   {
     type: 'list',
     name: 'wallet',
@@ -81,15 +84,15 @@ export async function mainFunction() {
   try {
     const answers = await inquirer.prompt(questions)
     const directory = `./${answers.projectName}`
-    const repoUrl = 'https://github.com/Seranged/EVM-FE-Bootstrap.git'
-    const branch = 'cli-base'
+    const repoUrl = 'https://github.com/Seranged/EVM-Scaffold-Base-Application.git'
     const spinnerRepo: any = ora('Installing base NextJS files').start()
-    await cloneRepo(repoUrl, branch, directory)
+    await cloneRepo(repoUrl, directory)
     spinnerRepo.succeed()
     const spinnerInstall: any = ora('Installing base dependencies').start()
     await createPackageJson(answers.projectName, directory, answers.linter)
     await installDependencies([], directory)
     spinnerInstall.succeed()
+
     if (answers.linter === 'ESLint and Prettier') {
       const spinner: any = ora('Adding and installing Eslint and Prettier...').start()
       await installDependencies(['eslint', 'prettier'], directory)
@@ -103,6 +106,7 @@ export async function mainFunction() {
       fs.writeFileSync(`${directory}/rome.json`, JSON.stringify(romeConfig, null, 2))
       spinner.succeed()
     }
+
     if (answers.wallet === 'RainbowKit') {
       const spinner: any = ora('Adding RainbowKit and a Navbar...').start()
       await installDependencies(['@rainbow-me/rainbowkit'], directory)
@@ -117,6 +121,35 @@ export async function mainFunction() {
       fs.writeFileSync(path.join(directory, 'src', 'components', 'navbar', 'Navbar.tsx'), ConnectKitNavbar)
       spinner.succeed()
     }
+
+    if (answers.wallet === 'ConnectKit' && answers.router === 'App Router') {
+      const spinner: any = ora('Adding ConnectKit App Router...').start()
+      fs.mkdirSync(path.join(directory, 'src', 'app'), { recursive: true })
+      fs.writeFileSync(path.join(directory, 'src', 'app', 'layout.tsx'), appRouterConnectKit)
+      spinner.succeed()
+    }
+
+    if (answers.wallet === 'RainbowKit' && answers.router === 'App Router') {
+      const spinner: any = ora('Adding RainbowKit App Router...').start()
+      fs.mkdirSync(path.join(directory, 'src', 'app'), { recursive: true })
+      fs.writeFileSync(path.join(directory, 'src', 'app', 'layout.tsx'), appRouterRainbowKit)
+      spinner.succeed()
+    }
+
+    if (answers.wallet === 'ConnectKit' && answers.router === 'Pages Router') {
+      const spinner: any = ora('Adding ConnectKit App Router...').start()
+      fs.mkdirSync(path.join(directory, 'src', 'app'), { recursive: true })
+      fs.writeFileSync(path.join(directory, 'src', 'pages', '_app.tsx'), pagesRouterConnectKit)
+      spinner.succeed()
+    }
+
+    if (answers.wallet === 'RainbowKit' && answers.router === 'Pages Router') {
+      const spinner: any = ora('Adding RainbowKit App Router...').start()
+      fs.mkdirSync(path.join(directory, 'src', 'app'), { recursive: true })
+      fs.writeFileSync(path.join(directory, 'src', 'pages', '_app.tsx'), pagesRouterRainbowKit)
+      spinner.succeed()
+    }
+    
     // if (answers.typeChecker === 'AbiType') {
     //   fs.copyFileSync(
     //     path.join(__dirname, './scripts/nextjs/evmTypescript/functions/readContract.ts'),

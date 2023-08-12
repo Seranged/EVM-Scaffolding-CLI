@@ -13,11 +13,6 @@ export const prettierConfig = {
     printWidth: 120,
 };
 export function createPrettierIgnore(directory) {
-    const ignorePatterns = [
-        '# Ignore artifacts:',
-        'build',
-        'coverage',
-        'node_modules',
-    ].join('\n');
+    const ignorePatterns = ['# Ignore artifacts:', 'build', 'coverage', 'node_modules'].join('\n');
     fs.writeFileSync(`${directory}/.prettierignore`, ignorePatterns);
 }

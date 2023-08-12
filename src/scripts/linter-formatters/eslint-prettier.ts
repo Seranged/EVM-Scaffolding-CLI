@@ -16,12 +16,7 @@ export const prettierConfig = {
 }
 
 export function createPrettierIgnore(directory: string): void {
-  const ignorePatterns = [
-    '# Ignore artifacts:',
-    'build',
-    'coverage',
-    'node_modules',
-  ].join('\n');
+  const ignorePatterns = ['# Ignore artifacts:', 'build', 'coverage', 'node_modules'].join('\n')
 
-  fs.writeFileSync(`${directory}/.prettierignore`, ignorePatterns);
+  fs.writeFileSync(`${directory}/.prettierignore`, ignorePatterns)
 }
