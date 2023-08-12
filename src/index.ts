@@ -143,8 +143,8 @@ export async function mainFunction() {
     }
 
     if (answers.wallet === 'ConnectKit' && answers.router === 'Pages Router') {
-      const spinner: any = ora('Adding ConnectKit App Router...').start()
-      fs.mkdirSync(path.join(directory, 'src', 'app'), { recursive: true })
+      const spinner: any = ora('Adding ConnectKit Pages Router...').start()
+      fs.mkdirSync(path.join(directory, 'src', 'pages'), { recursive: true })
       fs.writeFileSync(path.join(directory, 'src', 'pages', '_app.tsx'), pagesRouterConnectKit)
       fs.writeFileSync(path.join(directory, 'src', 'app', '404.tsx'), page404)
       fs.writeFileSync(path.join(directory, 'src', 'app', 'index.tsx'), homePage)
@@ -152,8 +152,8 @@ export async function mainFunction() {
     }
 
     if (answers.wallet === 'RainbowKit' && answers.router === 'Pages Router') {
-      const spinner: any = ora('Adding RainbowKit App Router...').start()
-      fs.mkdirSync(path.join(directory, 'src', 'app'), { recursive: true })
+      const spinner: any = ora('Adding RainbowKit Pages Router...').start()
+      fs.mkdirSync(path.join(directory, 'src', 'pages'), { recursive: true })
       fs.writeFileSync(path.join(directory, 'src', 'pages', '_app.tsx'), pagesRouterRainbowKit)
       fs.writeFileSync(path.join(directory, 'src', 'app', '404.tsx'), page404)
       fs.writeFileSync(path.join(directory, 'src', 'app', 'index.tsx'), homePage)

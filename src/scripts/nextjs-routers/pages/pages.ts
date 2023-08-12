@@ -1,22 +1,21 @@
 export const pagesRouterConnectKit = `import '@/styles/styles.css'
-import '@fortawesome/fontawesome-svg-core/styles.css'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 import { createConfig, WagmiConfig } from 'wagmi'
-import { arbitrum, optimism } from '@wagmi/chains'
+import { mainnet, arbitrum } from '@wagmi/chains'
 import { configureChains, mainnet } from '@wagmi/core'
 import { publicProvider } from '@wagmi/core/providers/public'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { ConnectKitProvider, getDefaultConfig } from 'connectkit'
-import { Header } from '@/components/header/Header'
+import { Navbar } from '@/components/Navbar/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
 const alchemyId = process.env.ALCHEMY_API_KEY
 
 const { chains, publicClient } = configureChains(
-  [mainnet, optimism, arbitrum],
+  [mainnet, arbitrum],
   [alchemyProvider({ apiKey: alchemyId }), publicProvider()],
 )
 
@@ -44,10 +43,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.png' />
       </Head>
-      <main className=\`\${inter.className}\`>
+      {/* Place inter.className in the classname below to activate the font accross the entire application  */}
+      <main className=''>
           <WagmiConfig config={config}>
             <ConnectKitProvider theme="midnight">
-              <Header />
+              <Navbar />
               <Component {...pageProps} />
             </ConnectKitProvider>
           </WagmiConfig>
@@ -68,7 +68,7 @@ import { configureChains, mainnet } from '@wagmi/core'
 import { publicProvider } from '@wagmi/core/providers/public'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { getDefaultWallets, midnightTheme, RainbowKitProvider } from '@rainbow-me/rainbowkit'
-import { Header } from '@/components/header/Header'
+import { Navbar } from '@/components/Navbar/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -101,10 +101,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.png' />
       </Head>
-      <main className=\`\${inter.className}\`>
+      {/* Place inter.className in the classname below to activate the font accross the entire application  */}
+      <main className=''>
         <WagmiConfig config={config}>
           <RainbowKitProvider chains={chains} modalSize='compact' theme={midnightTheme()}>
-            <Header />
+            <Navbar />
             <Component {...pageProps} />
           </RainbowKitProvider>
         </WagmiConfig>

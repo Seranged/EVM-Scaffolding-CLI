@@ -1,6 +1,7 @@
 import fs from 'fs'
+import latestVersion from 'latest-version';
 
-export function createPackageJson(projectName: string, directory: string, linter: string): void {
+export async function createPackageJson(projectName: string, directory: string, linter: string): Promise<void> {
   const scripts: { [key: string]: string } = {
     dev: 'next dev',
     build: 'next build',
@@ -16,6 +17,22 @@ export function createPackageJson(projectName: string, directory: string, linter
   } else if (linter === 'None') {
   }
 
+  const dependencies = {
+    '@types/node': await latestVersion('@types/node'),
+    '@types/react': await latestVersion('@types/react'),
+    '@types/react-dom': await latestVersion('@types/react-dom'),
+    autoprefixer: await latestVersion('autoprefixer'),
+    encoding: await latestVersion('encoding'),
+    next: await latestVersion('next'),
+    postcss: await latestVersion('postcss'),
+    react: await latestVersion('react'),
+    'react-dom': await latestVersion('react-dom'),
+    tailwindcss: await latestVersion('tailwindcss'),
+    typescript: await latestVersion('typescript'),
+    viem: await latestVersion('viem'),
+    wagmi: await latestVersion('wagmi'),
+  };
+
   fs.writeFileSync(
     `${directory}/package.json`,
     JSON.stringify(
@@ -25,21 +42,7 @@ export function createPackageJson(projectName: string, directory: string, linter
         license: 'MIT',
         version: '0.1.0',
         scripts,
-        dependencies: {
-          '@types/node': '20.4.7',
-          '@types/react': '18.2.18',
-          '@types/react-dom': '18.2.7',
-          autoprefixer: '10.4.14',
-          encoding: '^0.1.13',
-          next: '13.4.12',
-          postcss: '8.4.27',
-          react: '18.2.0',
-          'react-dom': '18.2.0',
-          tailwindcss: '3.3.3',
-          typescript: '5.1.6',
-          viem: '^1.5.3',
-          wagmi: '^1.3.9',
-        },
+        dependencies,
       },
       null,
       2,
