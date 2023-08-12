@@ -34,7 +34,7 @@ const questions = [
     name: 'linter',
     message: 'Which linter/formatter do you want to use?',
     default: ['Rome'],
-    choices: ['Rome', 'ESLint and Prettier', 'None'],
+    choices: ['Rome', 'ESLint and Prettier'],
   },
   {
     type: 'list',
@@ -48,7 +48,7 @@ const questions = [
     name: 'wallet',
     default: ['RainbowKit'],
     message: 'Which wallet connection handler do you want to use?',
-    choices: ['RainbowKit', 'ConnectKit', 'None'],
+    choices: ['RainbowKit', 'ConnectKit'],
   },
   // {
   //   type: 'list',
@@ -62,13 +62,13 @@ const questions = [
   //   name: 'typeChecker',
   //   default: ['AbiType'],
   //   message: 'Which EVM contract type checker do you want to use?',
-  //   choices: ['AbiType', 'TypeChain', 'None'],
+  //   choices: ['AbiType', 'TypeChain'],
   // },
   // {
   //   type: 'list',
   //   name: 'stateManager',
   //   message: 'Which global state manager do you want to use?',
-  //   choices: ['Redux', 'MobX', 'Zustand', 'None'],
+  //   choices: ['Redux', 'Zustand', 'None'],
   // },
 ]
 

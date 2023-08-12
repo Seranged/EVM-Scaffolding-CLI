@@ -31,7 +31,7 @@ export const createReadme = (walletHandler, linterFormatter) => {
     ]
         .filter(Boolean)
         .join('\n');
-    return `# EVM-FE-Bootstrap Repo [![twitter URL](https://img.shields.io/twitter/url/https/twitter.com/seranged.svg?style=social&label=Follow%20%40seranged)](https://twitter.com/seranged)
+    return `# EVM-FE-Bootstrap [![twitter URL](https://img.shields.io/twitter/url/https/twitter.com/seranged.svg?style=social&label=Follow%20%40seranged)](https://twitter.com/seranged)
     
     Thank you for using my EVM-FE-Bootstrap CLI prompter!
     
@@ -41,9 +41,8 @@ export const createReadme = (walletHandler, linterFormatter) => {
       
     ## Getting Started
       
-    1. Run pnpm install to install dependencies.
-    2. Create .env.local file in root and add ALCHEMY_API_KEY
-    3. Run pnpm dev to begin developing.
+    1. Create .env.local file in root and add ALCHEMY_API_KEY
+    2. Run pnpm dev to begin developing.
       `
         .split('\n')
         .map((line) => line.trimStart())

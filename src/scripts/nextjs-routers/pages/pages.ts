@@ -19,17 +19,18 @@ const { chains, publicClient } = configureChains(
   [alchemyProvider({ apiKey: alchemyId }), publicProvider()],
 )
 
+const projectId = 'WalletConnectAPIKey(NeedsReplacing)'
+
 const config = createConfig(
   getDefaultConfig({
     appName: 'Seranged-EVM-Bootstrap',
-    walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_API_KEY,
+    walletConnectProjectId: projectId,
     autoConnect: true,
     publicClient,
     alchemyId,
     chains,
   }),
 )
-
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
