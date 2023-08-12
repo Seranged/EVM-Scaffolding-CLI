@@ -13,13 +13,12 @@ import { readFileSync } from 'fs';
 import ora from 'ora';
 import inquirer from 'inquirer';
 import path from 'path';
-import { installDependencies } from './scripts/installDependencies.js';
-import { modifyScripts } from './scripts/modifyScripts.js';
+import { installDependencies } from './scripts/functions/installDependencies.js';
 import { romeConfig } from './scripts/linter-formatters/rome.js';
 import { prettierConfig } from './scripts/linter-formatters/eslint-prettier.js';
 import { eslintConfig } from './scripts/linter-formatters/eslint-prettier.js';
 import { createPackageJson } from './scripts/createPackageJson.js';
-import { cloneRepo } from './scripts/cloneRepo.js';
+import { cloneRepo } from './scripts/functions/cloneRepo.js';
 import { RainbowKitNavbar } from './scripts/navbar/rainbowKitNavbar.js';
 import { ConnectKitNavbar } from './scripts/navbar/connectKitNavbar.js';
 import { createPrettierIgnore } from './scripts/linter-formatters/eslint-prettier.js';
@@ -86,7 +85,7 @@ export function mainFunction() {
           SERANGED              EVM               BOOTSTRAP                                                                                                 
   53 45 52 41 4E 47 45 44    45 56 4D    42 4F 4F 54 53 54 52 41 50   
  
-               Package Version: ${packageInfo.version}
+                  Package Version: ${packageInfo.version}
 
   ︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾︾
   `);
@@ -168,12 +167,6 @@ export function mainFunction() {
             //     path.join(process.cwd(), './src/contracts/readContract.ts'),
             //   )
             // }
-            if (answers.dependencies && answers.dependencies.length > 0) {
-                yield installDependencies(answers.dependencies, directory);
-            }
-            if (answers.scripts && answers.scripts.length > 0) {
-                yield modifyScripts(answers.scripts);
-            }
             console.log('EVM scaffolding CLI has finished running.');
         }
         catch (error) {
