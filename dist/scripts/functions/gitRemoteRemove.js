@@ -1,11 +1,16 @@
 import { exec } from 'child_process';
-export function removeGitRemoteOrigin() {
-    exec('git remote remove origin', (error, stdout, stderr) => {
-        if (error) {
-            console.error(`exec error: ${error}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
-        console.error(`stderr: ${stderr}`);
+export function removeGitRemoteOrigin(repoPath) {
+    return new Promise((resolve, reject) => {
+        exec('git remote remove origin', { cwd: repoPath }, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`exec error: ${error}`);
+                reject(error);
+            }
+            else {
+                console.log(`stdout: ${stdout}`);
+                console.error(`stderr: ${stderr}`);
+                resolve();
+            }
+        });
     });
 }

@@ -84,7 +84,7 @@ export async function mainFunction() {
     const repoUrl = 'https://github.com/Seranged/EVM-Scaffold-Base-Application.git'
     const spinnerRepo: any = ora('Installing base NextJS files').start()
     await cloneRepo(repoUrl, directory)
-    await removeGitRemoteOrigin()
+    await removeGitRemoteOrigin(directory)
     fs.writeFileSync(`${directory}/README.md`, createReadme(answers.wallet, answers.linter))
     spinnerRepo.succeed()
     const spinnerInstall: any = ora('Installing base dependencies').start()

@@ -91,7 +91,7 @@ export function mainFunction() {
             const repoUrl = 'https://github.com/Seranged/EVM-Scaffold-Base-Application.git';
             const spinnerRepo = ora('Installing base NextJS files').start();
             yield cloneRepo(repoUrl, directory);
-            yield removeGitRemoteOrigin();
+            yield removeGitRemoteOrigin(directory);
             fs.writeFileSync(`${directory}/README.md`, createReadme(answers.wallet, answers.linter));
             spinnerRepo.succeed();
             const spinnerInstall = ora('Installing base dependencies').start();
