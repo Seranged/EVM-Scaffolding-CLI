@@ -7,8 +7,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import fs from 'fs';
+import fs, { readFileSync } from 'fs';
 import latestVersion from 'latest-version';
+const packageInfo = JSON.parse(readFileSync(new URL('../../package.json', import.meta.url)).toString());
 export function createPackageJson(projectName, directory, linter) {
     return __awaiter(this, void 0, void 0, function* () {
         const scripts = {
@@ -45,7 +46,7 @@ export function createPackageJson(projectName, directory, linter) {
             name: projectName,
             author: 'Seranged',
             license: 'MIT',
-            version: '0.1.0',
+            version: `${packageInfo.version}`,
             scripts,
             dependencies,
         }, null, 2));

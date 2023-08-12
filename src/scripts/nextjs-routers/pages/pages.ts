@@ -99,7 +99,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Seranged-EVM-Bootstrap</title>
         <meta name='description' content='Zoom Zoom' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <link rel='icon' href='/favicon.png' />
+        <link rel='icon' type='image/png' sizes='64x64' href='/favicon.png' />
       </Head>
       {/* Place inter.className in the classname below to activate the font accross the entire application  */}
       <main className=''>

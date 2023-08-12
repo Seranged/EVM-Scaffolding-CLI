@@ -5,11 +5,11 @@ import React from 'react'
 
 export default function NotFound() {
   return (
-    <main className='min-w-[calc(100vh)]  min-h-[calc(85vh)] flex justify-center items-center'>
-      <div className='flex flex-col justify-center'>
-        <div className='text-white'>Page Not Found</div>
-        <Link className='w-full flex justify-center mt-4' href='/'>
-          <button type='button'>Homepage</button>
+    <main className='flex min-h-screen flex-col items-center justify-center'>
+    <div className='flex flex-col justify-center'>
+        <div className='rounded-xl border border-slate-500 bg-gradient-to-b from-zinc-800/30 to-zinc-500/40 p-4'>Page Not Found</div>
+        <Link className='flex justify-center' href='/'>
+          <button type='button' className='mt-3 rounded-xl border border-slate-500 bg-gradient-to-b p-3 from-zinc-800/30 to-zinc-500/40 hover:from-zinc-800/40 hover:to-zinc-500/50'>Homepage</button>
         </Link>
       </div>
     </main>

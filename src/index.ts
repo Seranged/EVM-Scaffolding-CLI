@@ -14,11 +14,10 @@ import { cloneRepo } from './scripts/cloneRepo.js'
 import { RainbowKitNavbar } from './scripts/navbar/rainbowKitNavbar.js'
 import { ConnectKitNavbar } from './scripts/navbar/connectKitNavbar.js'
 import { createPrettierIgnore } from './scripts/linter-formatters/eslint-prettier.js'
-import { appRouterRainbowKit, appRouterConnectKit } from './scripts/nextjs-routers/app/app.js';
-import { pagesRouterRainbowKit, pagesRouterConnectKit } from './scripts/nextjs-routers/pages/pages.js';
+import { appRouterRainbowKit, appRouterConnectKit } from './scripts/nextjs-routers/app/app.js'
+import { pagesRouterRainbowKit, pagesRouterConnectKit } from './scripts/nextjs-routers/pages/pages.js'
 import { page404 } from './scripts/nextjs-routers/404.js'
 import { homePage } from './scripts/nextjs-routers/homePage.js'
-
 
 const packageInfo = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)).toString())
 
@@ -159,7 +158,7 @@ export async function mainFunction() {
       fs.writeFileSync(path.join(directory, 'src', 'app', 'index.tsx'), homePage)
       spinner.succeed()
     }
-    
+
     // if (answers.typeChecker === 'AbiType') {
     //   fs.copyFileSync(
     //     path.join(__dirname, './scripts/nextjs/evmTypescript/functions/readContract.ts'),

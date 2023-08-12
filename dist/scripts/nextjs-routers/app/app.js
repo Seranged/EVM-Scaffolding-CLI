@@ -8,7 +8,7 @@ import { mainnet, arbitrum } from 'wagmi/chains'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 import { getDefaultWallets, RainbowKitProvider, midnightTheme } from '@rainbow-me/rainbowkit'
-import Navbar from '@/components/Navbar/Navbar'
+import { Navbar } from '@/components/Navbar/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -43,16 +43,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <html lang='en'>
       {/* Place inter.className in the classname below to activate the font accross the entire application  */}
-      <main className=''>
-          <body>
-            <WagmiConfig config={config}>
-              <RainbowKitProvider chains={chains} modalSize='compact' theme={midnightTheme()}>
-                <Navbar />
-                {children}
-              </RainbowKitProvider>
-            </WagmiConfig>
-          </body>
-        </main>
+        <body className=''>
+          <WagmiConfig config={config}>
+            <RainbowKitProvider chains={chains} modalSize='compact' theme={midnightTheme()}>
+              <Navbar />
+              {children}
+            </RainbowKitProvider>
+          </WagmiConfig>
+          </WagmiConfig>
+        </body>
       </html>
     </>
   )
@@ -66,7 +65,7 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { mainnet, arbitrum } from 'wagmi/chains'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
-import Navbar from '@/components/Navbar/Navbar'
+import { Navbar } from '@/components/Navbar/Navbar'
 import { ConnectKitProvider, getDefaultConfig } from 'connectkit'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -103,16 +102,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <html lang='en'>
       {/* Place inter.className in the classname below to activate the font accross the entire application  */}
-        <main className=''>
-          <body>
-            <WagmiConfig config={config}>
-              <ConnectKitProvider theme='midnight'>
-                <Navbar />
-                {children}
-              </ConnectKitProvider>
-            </WagmiConfig>
-          </body>
-        </main>
+        <body className=''>
+          <WagmiConfig config={config}>
+            <ConnectKitProvider theme='midnight'>
+              <Navbar />
+              {children}
+            </ConnectKitProvider>
+          </WagmiConfig>
+        </body>
       </html>
     </>
   )

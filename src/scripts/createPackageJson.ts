@@ -1,5 +1,6 @@
-import fs from 'fs'
-import latestVersion from 'latest-version';
+import fs, { readFileSync } from 'fs'
+import latestVersion from 'latest-version'
+const packageInfo = JSON.parse(readFileSync(new URL('../../package.json', import.meta.url)).toString())
 
 export async function createPackageJson(projectName: string, directory: string, linter: string): Promise<void> {
   const scripts: { [key: string]: string } = {
@@ -31,7 +32,7 @@ export async function createPackageJson(projectName: string, directory: string, 
     typescript: await latestVersion('typescript'),
     viem: await latestVersion('viem'),
     wagmi: await latestVersion('wagmi'),
-  };
+  }
 
   fs.writeFileSync(
     `${directory}/package.json`,
@@ -40,7 +41,7 @@ export async function createPackageJson(projectName: string, directory: string, 
         name: projectName,
         author: 'Seranged',
         license: 'MIT',
-        version: '0.1.0',
+        version: `${packageInfo.version}`,
         scripts,
         dependencies,
       },
