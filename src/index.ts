@@ -89,13 +89,13 @@ export async function mainFunction() {
     const repoUrl = 'https://github.com/Seranged/EVM-Scaffold-Base-Application.git'
     const spinnerRepo: any = ora('Installing base NextJS files').start()
     await cloneRepo(repoUrl, directory)
+    fs.writeFileSync(`${directory}/README.md`, createReadme(answers.wallet, answers.linter))
     spinnerRepo.succeed()
     const spinnerInstall: any = ora('Installing base dependencies').start()
     await createPackageJson(answers.projectName, directory, answers.linter)
     await installDependencies([], directory)
-    fs.writeFileSync(`${directory}/README.md`, createReadme(answers.wallet, answers.linter))
     spinnerInstall.succeed()
-    
+
     if (answers.linter === 'ESLint and Prettier') {
       const spinner: any = ora('Adding and installing Eslint and Prettier...').start()
       await installDependencies(['eslint', 'prettier'], directory)

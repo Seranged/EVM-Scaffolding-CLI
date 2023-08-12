@@ -28,19 +28,24 @@ export const createReadme = (walletHandler, linterFormatter) => {
         '- [WAGMI](https://github.com/wagmi-dev/wagmi)',
         '- [Viem](https://github.com/wagmi-dev/viem)',
         '- [Typescript](https://github.com/microsoft/TypeScript)',
-    ].filter(Boolean).join('\n');
+    ]
+        .filter(Boolean)
+        .join('\n');
     return `# EVM-FE-Bootstrap Repo [![twitter URL](https://img.shields.io/twitter/url/https/twitter.com/seranged.svg?style=social&label=Follow%20%40seranged)](https://twitter.com/seranged)
     
     Thank you for using my EVM-FE-Bootstrap CLI prompter!
     
     ## Stack
-    
+  
     ${stack}
-    
+      
     ## Getting Started
-    
+      
     1. Run pnpm install to install dependencies.
     2. Create .env.local file in root and add ALCHEMY_API_KEY
     3. Run pnpm dev to begin developing.
-    `;
+      `
+        .split('\n')
+        .map((line) => line.trimStart())
+        .join('\n');
 };
