@@ -16,7 +16,6 @@
     "tsc": "tsc",
     "publish": "npm publish",
     "ts-prune": "ts-prune"
-
   },
   "bin": {
     "evm-scaffolding-cli": "./dist/index.js"
@@ -49,17 +48,16 @@
     "sinon": "^15.2.0"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.3",
-    "@types/lodash": "^4.14.196",
+    "@types/jest": "^29.5.4",
+    "@types/lodash": "^4.14.197",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^20.4.8",
-    "@types/react": "^18.2.18",
+    "@types/node": "^20.5.8",
+    "@types/react": "^18.2.21",
     "@types/sinon": "^10.0.16",
     "eslint": "^7.32.0",
-    "jest": "^26.6.3",
     "ncp": "^2.0.0",
     "prettier": "^2.8.8",
     "ts-prune": "^0.10.3",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   }
 }
