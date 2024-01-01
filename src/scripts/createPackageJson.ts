@@ -1,5 +1,6 @@
 import fs, { readFileSync } from 'fs'
 import latestVersion from 'latest-version'
+
 const packageInfo = JSON.parse(readFileSync(new URL('../../package.json', import.meta.url)).toString())
 
 export async function createPackageJson(projectName: string, directory: string, linter: string): Promise<void> {
